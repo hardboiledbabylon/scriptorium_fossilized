@@ -1,0 +1,185 @@
+{H2>}||<h2>||
+{<H2}||</h2>||
+{.}||.||
+{NAME_CENSOR}||——||
+{~.}||. ||
+{AND}||&amp;||
+{CENTER>}||<p class="center">||
+{<CENTER}||</p>||
+{ELLIPSIS_SPACED}|| … ||
+{HUGE>}||<span class="f150">||
+{<HUGE}||</span>||
+{HUGER>}||<span class="f300">||
+{<HUGER}||</span>||
+{SPACE}|| ||
+{NBSP}||&#xA0;||
+
+{NOINDENT}||||
+
+{1ST_PARA>}||<p class="noindent">||
+{<1ST_PARA}||</p>||
+
+{BRACE_L}||{||
+{BRACE_R}||}||
+
+{NOINDENT>}||<div class="noindent">||
+{<NOINDENT}||</div>||
+
+{NOINDENT2>}||<div class="noindent">||
+{<NOINDENT2}||</div>||
+
+{NOINDENT!>}||<p class="noindent">||
+{<NOINDENT!}||</p>||
+
+{PAD_B>}||<p class="pad_1em_top">||
+{<PAD_B}||</p>||
+{PAD_A>}||<p class="pad_1em_bot">||
+{<PAD_A}||</p>||
+{PAD_BA>}||<p class="pad_1em">||
+{<PAD_BA}||</p>||
+
+{THINSPACE}|| ||
+
+{VCENTER>}||||
+{<VCENTER}||||
+
+{b>}||<span class="bold">||
+{<b}||</span>||
+{i>}||<span class="italic">||
+{<i}||</span>||
+{n>}||<span class="normal">||
+{<n}||</span>||
+{u>}||<span class="underline">||
+{<u}||</span>||
+{ui>}||<span class="italic underline">||
+{<ui}||</span>||
+{bi>}||<span class="italic bold">||
+{<bi}||</span>||
+
+{ELLIPSIS_PERIOD}||….||
+{ELLIPSIS_QUESTION}||…?||
+{ELLIPSIS_EXCLAMATION}||…!||
+{ELLIPSIS_COMMA}||…,||
+{ELLIPSIS_END_QUOTE}||…”||
+{ELLIPSIS_END}||… ||
+{QUOTE_END_THINSPACE}||’ ”||
+{QUOTE_START_THINSPACE}||“ ‘||
+{EMDASH_END_QUOTE}||—”||
+{EMDASH_START_QUOTE}||“—||
+{STARTING_ELLIPSIS}||…||
+
+{ASTERISK}||*||
+
+{.}||. ||
+{~.}||. ||
+
+{GREATER_THAN}||&gt;||
+{LESS_THAN}||&lt;||
+
+{TELETYPE>}||<span class="teletype">||
+{<TELETYPE}||</span>||
+
+{LEFT_ARROW}||←||
+{RIGHT_ARROW}||→||
+
+{sc>}||<span class="smallcaps">||
+{<sc}||</span>||
+{...$}||…||
+{....$}||.…||
+{...}||…||
+{%...}|| …||
+{%...%}|| … ||
+{...?}||…?||
+{...!}||…!||
+{....}||.…||
+{...,}||…,||
+{...$$}||…||
+{^...}||…||
+{^---}||—||
+{%---}|| —||
+{---%}||— ||
+{---$$}||—||
+{---$}||—||
+{---}||—||
+{^---$}||—||
+{...%}||… ||
+{[...]}||[…]||
+{[...]$}||&#xA0;[…]||
+{^...$}||…||
+{~...~}||…||
+{}|| ||
+{^...%}||… ||
+
+{!?}||!?||
+{?!}||?!||
+{??}||??||
+
+{``}||“||
+{''}||”||
+{`}||‘||
+{'}||’||
+
+{"---}||—||
+{---"}||—||
+
+{SECTION}||<p>&#xA0;</p>||
+
+{NUM2>}||||
+{<NUM2}||||
+
+{S_Q>}||"||
+{<S_Q}||"||
+{SINGLE_Q>}||'||
+{<SINGLE_Q}||'||
+{ASCII:'>}||'||
+{<ASCII:'}||'||
+
+{SUP>}||<sup>||
+{<SUP}||</sup>||
+
+{MONO>}||||
+{<MONO}||||
+
+{TRADEMARK}||™||
+{REGISTERED}||®||
+{COPYRIGHT}||©||
+
+{DBLSPACE>}||<div class="doublespacedpara">||
+{<DBLSPACE}||</div>||
+
+{sc>}||<span class="smallcaps">||
+{<sc}||</span>||
+
+{FOOT>}||<p class="footnote">||
+{<FOOT}||</p>||
+
+{LARGE>}||<span class="f200">||
+{<LARGE}||</span>||
+
+{ALIGN_L>}||<p class="left_align">||
+{<ALIGN_L}||</p>||
+{ALIGN_R>}||<p class="right_align">||
+{<ALIGN_R}||</p>||
+
+{french>}||<span class="italic">||
+{<french}||</span>||
+{german>}||<span class="italic">||
+{<german}||</span>||
+{latin>}||<span class="italic">||
+{<latin}||</span>||
+{greek>}||<span class="italic">||
+{<greek}||</span>||
+
+{dsc>}||||
+{<dsc}||||
+
+{BOX>}||<span class="box">||
+{<BOX}||</span>||
+
+{BR}||<br/>||
+
+{ul@@}||<span class="underline">||
+{@@ul}||</span>||
+{Lul@@}||||
+{@@Lul}||||
+{@@Eul}||</span>||

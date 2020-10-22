@@ -1,0 +1,156 @@
+\documentclass[paper=5.25in:8in,pagesize=pdftex,headinclude=on,footinclude=on,fontsize=10.5pt]{scrbook}
+
+\usepackage{environ}
+
+\input{common.tex}
+
+\pagestyle{headings}
+
+\def\fourteenIdots{\unskip\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ .\ \ignorespaces}
+
+\def\longE{\multido{}{25}{\allowbreak{}e}}
+\def\sevenEs{\multido{}{7}{\allowbreak{}e}}
+\def\twentyoneEs{\multido{}{21}{\allowbreak{}e}}
+\def\hundredfortysevenEs{\multido{}{147}{\allowbreak{}e}}
+\def\twoninetyfourEs{\multido{}{294}{\allowbreak{}e}}
+
+
+%allow and extra 3 lines because otherwise a section
+%that might fit on a page won't because vplace\stretch
+%will add a small amount of space at the top
+\newlength\shomsectheight
+
+\NewEnviron{shomsection}{
+  \settototalheight{\shomsectheight}{
+    \begin{minipage}{\textwidth}
+      \BODY
+      \vspace{3\baselineskip}
+    \end{minipage}
+  }
+  \ifdim\shomsectheight<\textheight
+    \raggedbottom
+    \vspace*{\stretch{1}}
+    \BODY
+    \vspace*{\stretch{1}}
+    \newpage
+  \else
+    \flushbottom
+    \vspace*{9\baselineskip plus 2pt minus 2pt}
+    \BODY
+    \newpage
+  \fi
+}{}
+
+\def\newBook#1{\cleardoubleoddpage{}\thispagestyle{empty}\begin{vplace}{\centering {\Huge BOOK #1}\\}\end{vplace}\cleardoubleoddpage{}}
+
+\def\bookI{\cleardoubleoddpage{}}
+\def\bookII{\newBook{II}}
+\def\bookIII{\newBook{III}}
+\def\bookIV{\newBook{IV}}
+\def\bookV{\newBook{V}}
+\def\bookVI{\newBook{VI}}
+\def\bookVII{\newBook{VII}}
+
+\newfontfamily{\shomfont}[Ligatures=TeX,
+Path=./fonts/,
+BoldFont=SHOMGREEKMIN.ttf,
+ItalicFont=SHOMGREEKMIN.ttf,
+BoldItalicFont=SHOMGREEKMIN.ttf,
+SlantedFont=SHOMGREEKMIN.ttf,
+BoldSlantedFont=SHOMGREEKMIN.ttf,
+UprightFont=SHOMGREEKMIN.ttf]{SHOMGREEKMIN}
+
+\newenvironment{SHOMteletype}{%
+\vspace{1\baselineskip plus 2pt minus 2pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0em}
+\teletypefont
+\fontsize{9pt}{10.5pt}\selectfont
+}{%
+\normalsize
+\vspace{1\baselineskip plus 2pt minus 2pt}
+}
+
+%email
+%6x9 7.5
+\newenvironment{SHOMteletypeB}{%
+\vspace{\baselineskip}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0em}
+\teletypefont
+\fontsize{7pt}{8.5pt}\selectfont
+}{%
+\normalsize
+\vspace{\baselineskip}
+}
+
+%copyright warning
+%6x9 8 9.5
+\newenvironment{SHOMteletypeC}{%
+\vspace{\baselineskip}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0em}
+\teletypefont
+\fontsize{7pt}{8.5pt}\selectfont
+}{%
+\normalsize
+\vspace{\baselineskip}
+}
+
+\newenvironment{SHOMepic}{%
+\leftskip=\parindent
+\parindent=-\leftskip
+}{}
+
+\newenvironment{SHOMpoem}{%
+\begin{doublespacedpara}
+\begin{center}
+}{%
+\end{center}
+\end{doublespacedpara}}
+
+\newenvironment{SHOMtheatre}{%
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+\clubpenalty10000
+\widowpenalty10000
+\flushbottom
+\begin{addmargin}[2em]{2em}}{%
+\end{addmargin}}
+
+\newenvironment{SHOMinterview}{%
+\begin{disableindentonly}
+\clubpenalty10000
+\widowpenalty10000
+}{%
+\end{disableindentonly}
+}
+
+\def\SHOMnotsign{%
+\hfill \fontsize{50}{50}\selectfont \raisebox{-10pt}{^^bf}
+\kern-25pt\relax ^^ac \hfill\null}
+
+\renewcommand*{\thefootnote}{}
+
+\renewcommand{\footnoterule}{%
+\kern -3pt
+\hrule width \textwidth height 1pt
+\kern 2pt
+}
+
+\interfootnotelinepenalty=10000
+
+\input{hyphenates.tex}
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+\openPRINTorWEB
+
+\input{frontmatter.tex}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{body.tex}
+
+\MAYBEdoENDPAGE
+
+\end{document}

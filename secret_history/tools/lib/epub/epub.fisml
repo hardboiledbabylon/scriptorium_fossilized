@@ -1,0 +1,151 @@
+{12DOTS}||............||
+{14_I_DOTS}|| . . . . . . . . . . . . . . ||
+{14_I_DOTS$}|| . . . . . . . . . . . . . . ||
+{9DOTS%}||......... ||
+{42DOTS%}||.......................................... ||
+{15DOTS}||...............||
+{18DOTS}||..................||
+{21DOTS}||.....................||
+{21ES}||eeeeeeeeeeeeeeeeeeeee||
+{42DOTS}||..........................................||
+{6DOTS}||......||
+{75DOTS}||...........................................................................||
+{18DOTS%}||.................. ||
+{7DOTS}||.......||
+{7ES}||eeeeeee||
+{9DOTS}||.........||
+{294ES}||eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee||
+{12DOTS$}||............||
+{12DOTS%}||............ ||
+{9DOTS$}||.........||
+{6DOTS$}||......||
+{6DOTS%}||...... ||
+{18DOTS$}||..................||
+{^9DOTS}||.........||
+{21DOTS}||.....................||
+{21DOTS$}||.....................||
+{42DOTS}||..........................................||
+{42DOTS$}||..........................................||
+{15DOTS$}||...............||
+{7DOTS$}||.......||
+
+{GLUE}||||
+
+{fi>}||<span class="italic">||
+{<fi}||</span>||
+{li>}||||
+{<li}||||
+
+{BLOCK_RIGHT>}||<div class="block_right">||
+{<BLOCK_RIGHT}||</div>||
+{BLOCK_LEFT>}||<div class="block_left">||
+{<BLOCK_LEFT}||</div>||
+
+{THEATRE_BLOCK>}||<p class="theatre_block">||
+{<THEATRE_BLOCK}||</p>||
+
+{THEATRE_CENTER>}||<p class="theatre_center">||
+{<THEATRE_CENTER}||</p>||
+
+{Si>}||<span class="underline italic">||
+{<Si}||</span>||
+
+{TITLE>}||<p class="center smallcaps">||
+{<TITLE}||</p>||
+{TITLE_LVL2>}||<p class="center smallcaps pad_1em_bot">||
+{<TITLE_LVL2}||</p>||
+
+{DIALOG>}||<p class="center smallcaps pad_1em_top">||
+{<DIALOG}||</p>||
+{DIALOG1>}||<p class="center smallcaps">||
+{<DIALOG1}||</p>||
+{DIALOG2>}||<p class="center pad_1em_top">||
+{<DIALOG2}||</p>||
+
+{STGD>}||<span class="smallcaps normal">||
+{<STGD}||</span>||
+{CHAR>}||<span class="smallcaps normal">||
+{<CHAR}||</span>||
+
+{INTERVIEW>}||<div class="noindent_only">||
+{<INTERVIEW}||</div>||
+
+{SPKR>}||<p class="center smallcaps pad_1em_top">||
+{<SPKR}||</p>||
+
+{ACT>}||<p class="f200 center smallcaps">||
+{<ACT}||</p>||
+{SCENE>}||<p class="center pad_1em_top smallcaps">||
+{<SCENE}||</p>||
+
+{CENTER_PAD_A>}||<p class="center pad_1em_bot">||
+{<CENTER_PAD_A}||</p>||
+{CENTER_PAD_B>}||<p class="center pad_1p5em_top">||
+{<CENTER_PAD_B}||</p>||
+
+
+{HANGING>}||<p class="hanging">||
+{<HANGING}||</p>||
+
+{INDENT3>}||<p class="indentC">||
+{<INDENT3}||</p>||
+
+{INDENT_3EM>}||<p class="indent_3em">||
+{<INDENT_3EM}||</p>||
+
+
+{NOINDENT3>}||<div class="noindent_sspace">||
+{<NOINDENT3}||</div>||
+
+{PAD_LEFT>}||<p class="indent_7em">||
+{<PAD_LEFT}||</p>||
+
+{SECTION}||<p class="center pad_30p_bot invisible">-</p>||
+{SECTION_ALT}||<p class="center pad_20p_bot invisible">-</p>||
+{SECTION2>}||||
+{<SECTION2}||||
+
+{SHOM_BOOK_I}||||
+{SHOM_BOOK_II}||<p class="f200 center">BOOK II</p>||
+{SHOM_BOOK_III}||<p class="f200 center">BOOK III</p>||
+{SHOM_BOOK_IV}||<p class="f200 center">BOOK IV</p>||
+{SHOM_BOOK_V}||<p class="f200 center">BOOK V</p>||
+{SHOM_BOOK_VI}||<p class="f200 center">BOOK VI</p>||
+{SHOM_BOOK_VII}||<p class="f200 center">BOOK VII</p>||
+
+{TELETYPE2>}||<div class="teletype">||
+{<TELETYPE2}||</div>||
+
+{THEATRE>}||<div class="theatre">||
+{<THEATRE}||</div>||
+
+{_X_}||Χ||
+{LAMBDA}||λ||
+
+{JDATE1>}||<p class="underline">||
+{<JDATE1}||</p>||
+{JDATE>}||<p class="underline pad_1em_top">||
+{<JDATE}||</p>||
+
+{::IMAGE::BKUPS::}||<div class="txt_img"><img class="text_img_3em" alt="accidentally deleted everything and had to restore from backups" src="shom567.bkups.jpg"/></div>||
+{::IMAGE::COPYPASTE::}||<div class="txt_img pad_1em"><img class="text_img_7em" alt="a copy and paste error seems to have redacted things here" src="shom567.copypaste.jpg"/></div>||
+{::IMAGE::FETAL::}||<div class="txt_img pad_1em"><img class="text_img_3em" alt="use of the word fetal might be more appropriate" src="shom567.fetal.jpg"/></div>||
+{::IMAGE::TOOTFRUIT::}||<div class="txt_img"><img class="text_img_3em" alt="message from tootfruit asking if anyone has seen this chapter before" src="shom12.tootfruit.jpg"/></div>||
+
+{::IMAGE::EMAIL::}||<div class="txt_img"><img class="text_img_h" alt="dead (wo)man switch email" src="shom567.email.jpg"/></div>||
+{::IMAGE::GITLOG::}||<div class="txt_img"><img class="text_img" alt="git log for import of new fork of SHOM" src="shom567.gitlog.jpg"/></div>||
+{::IMAGE::SCRIPT::}||<div class="txt_img"><img class="text_img" alt="script to slightly re-word ebooks so they can't be detected by filters" src="shom567.script.jpg"/></div>||
+{::IMAGE::WARNING::}||<div class="txt_img"><img class="text_img" alt="warning this account has accessed material protected by copyright" src="shom567.warning.jpg"/></div>||
+
+
+{::NOT_SIGN::}||<div class="txt_img"><img class="text_img_h" alt="Not sign over upside down question mark" src="shom12.notsign.jpg"/></div>||
+
+{\\}||||
+
+{EPIC>}||<div class="epic">||
+{<EPIC}||</div>||
+
+{S_POETRY>}||<div class="s_poetry">||
+{<S_POETRY}||</div>||
+
+{@@@vspace-4pt}|||||

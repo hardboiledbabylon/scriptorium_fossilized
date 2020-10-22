@@ -1,0 +1,146 @@
+{14_I_DOTS}||\fourteenIdots ||
+{14_I_DOTS$}||\fourteenIdots ||
+{21ES}||\twentyoneEs ||
+{147ES}||\hundredfortysevenEs ||
+{294ES}||\twoninetyfourEs ||
+{7ES}||\sevenEs ||
+{18DOTS%}||\eighteenEndDots{} ||
+
+{GLUE}||\nopagebreak||
+
+{JDATE1>}||{\setul{4pt}{.75pt}\ul{||
+{<JDATE1}||}}\nopagebreak||
+{JDATE>}||\vspace{1\baselineskip plus 2pt minus 2pt}{\setul{4pt}{.75pt}\ul{||
+{<JDATE}||}}\nopagebreak||
+
+{THEATRE_BLOCK>}||\begin{addmargin}[3em]{0em}||
+{<THEATRE_BLOCK}||\end{addmargin}||
+
+{THEATRE_CENTER>}||{\centering ||
+{<THEATRE_CENTER}||\\*}||
+
+{BLOCK_RIGHT>}||\begin{addmargin}[.50\textwidth]{0em}||
+{<BLOCK_RIGHT}||\end{addmargin}||
+{BLOCK_LEFT>}||\begin{addmargin}[0em]{.25\textwidth}||
+{<BLOCK_LEFT}||\end{addmargin}||
+
+{Si>}||\ul{\textit{||
+{<Si}||}}||
+
+{TITLE>}||{\centering\scupcase ||
+{<TITLE}||\\}||
+{TITLE_LVL2>}||{\centering\scupcase ||
+{<TITLE_LVL2}||\\}||
+
+
+{DIALOG>}||\vspace{1\baselineskip plus 3pt minus 3pt}{\centering\scupcase ||
+{<DIALOG}||\\*}||
+{DIALOG1>}||{\centering\scupcase ||
+{<DIALOG1}||\\*}||
+{DIALOG2>}||\vspace{1\baselineskip plus 3pt minus 3pt}{\centering || 
+{<DIALOG2}||\\*}||
+
+{<CENTER}||\\*}||
+
+{STGD>}||{\scupcase ||
+{<STGD}||}||
+{CHAR>}||{\scupcase ||
+{<CHAR}||}||
+
+{INTERVIEW>}||\begin{SHOMinterview}||
+{<INTERVIEW}||\end{SHOMinterview}||
+
+{ACT>}||{\centering\Large\scupcase ||
+{<ACT}||\\}||
+
+{SCENE>}||\vspace{1\baselineskip plus 2pt minus 2pt}{\centering\scupcase ||
+{<SCENE}||\\}||
+
+{SPKR>}||\vspace{1\baselineskip plus 2pt minus 2pt}{\centering\scupcase ||
+{<SPKR}||\\*}||
+
+{CENTER_PAD_A>}||{\centering ||
+{<CENTER_PAD_A}||\\*[\baselineskip]}||
+{CENTER_PAD_B>}||\vspace{1\baselineskip plus 2pt minus 2pt}{\centering ||
+{<CENTER_PAD_B}||\\*}||
+
+ # .5\baselineksip before
+{HANGING>}||\hanging{}||
+{<HANGING}||\vspace{1\baselineskip plus 2pt minus 2pt}||
+
+{INDENT3>}||\raggedright\begin{addmargin}[.25\textwidth]{0em}||
+{<INDENT3}||\end{addmargin}||
+
+{INDENT_3EM}||\hspace*{3em}||
+{INDENT_3EM>}||\hspace*{3em}||
+{<INDENT_3EM}||||
+
+{NOINDENT3>}||\begin{disableindentb}||
+{<NOINDENT3}||\end{disableindentb}||
+
+{PAD_LEFT}||\hspace{3em}||
+{PAD_LEFT>}||\hspace{3em}||
+{<PAD_LEFT}||||
+
+{SECTION}||||
+
+{SECTION>}||\begin{shomsection}||
+{<SECTION}||\end{shomsection}||
+
+{SECTION2>}||\end{shomsection}||
+{<SECTION2}|e|\newpage^M^M\begin{shomsection}^M^M||
+
+{SHOM_BOOK_I}||\bookI ||
+{SHOM_BOOK_II}||\bookII ||
+{SHOM_BOOK_III}||\bookIII ||
+{SHOM_BOOK_IV}||\bookIV ||
+{SHOM_BOOK_V}||\bookV ||
+{SHOM_BOOK_VI}||\bookVI ||
+{SHOM_BOOK_VII}||\bookVII ||
+
+{TELETYPE>}||\begin{SHOMteletype}||
+{<TELETYPE}||\end{SHOMteletype}||
+
+{TELETYPE2>}||\begin{SHOMteletypeB}||
+{<TELETYPE2}||\end{SHOMteletypeB}||
+
+{TELETYPE3>}||\begin{SHOMteletypeC}||
+{<TELETYPE3}||\end{SHOMteletypeC}||
+
+{THEATRE>}||\begin{SHOMtheatre}||
+{<THEATRE}||\end{SHOMtheatre}||
+
+{LAMBDA}||{\shomfont ^^^^03bb}||
+{_X_}||{\shomfont ^^^^03a7}||
+
+{fi>}||||
+{<fi}||||
+{li>}||\textit{||
+{<li}||}||
+
+{ASTERISK}||*||
+
+{::IMAGE::BKUPS::}||||
+{::IMAGE::COPYPASTE::}||||
+{::IMAGE::EMAIL::}||||
+{::IMAGE::FETAL::}||||
+{::IMAGE::GITLOG::}||||
+{::IMAGE::SCRIPT::}||||
+{::IMAGE::TOOTFRUIT::}||||
+{::IMAGE::WARNING::}||||
+
+{::NOT_SIGN::}||\SHOMnotsign ||
+
+{\\}||\\* ||
+
+{@@FILL@@}||\hspace*{2em} ||
+{@@FILLB@@}||\hspace*{1em} ||
+{@@FILLC@@}||\hspace*{1.25em} ||
+
+{EPIC>}||\begin{SHOMepic}||
+{<EPIC}||\end{SHOMepic}||
+
+{S_POETRY>}||\begin{SHOMpoem}||
+{<S_POETRY}||\end{SHOMpoem}||
+
+{@@@vspace-4pt}||||

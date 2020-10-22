@@ -1,0 +1,626 @@
+\usepackage{graphicx}
+
+\usepackage{geometry}
+
+%\usepackage{scrextend}
+
+\usepackage{titling}
+
+\usepackage{tipa}
+
+\usepackage{soul}
+
+\usepackage{multido}
+
+\usepackage{fontspec}
+\usepackage{microtype}
+%\usepackage[tracking=smallcaps]{microtype}
+
+\usepackage{anyfontsize}
+
+\usepackage{luacode}
+\usepackage{luaotfload}
+
+\begin{luacode}
+
+local FONT = fontloader.open("./fonts/ECGaramond08-Regular.ttf")
+
+function getglyph2 ( f, a )
+ local u = unicode.utf8.byte( a )
+ if f then
+  if f.glyphcnt > 0 then
+   for i=f.glyphmin,f.glyphmax do
+    local g = f.glyphs[i]
+    if g then
+     if g.unicode == u then
+      return( g )
+     end
+    end
+   end
+  end
+ end
+return(nil)
+end
+
+function getglyph ( a )
+ local u = unicode.utf8.byte( a )
+ local f = fonts.hashes.identifiers[font.current()]
+ local font = fontloader.open(f.filename)
+ if font then
+  if font.glyphcnt > 0 then
+   for i=font.glyphmin,font.glyphmax do
+    local g = font.glyphs[i]
+    if g then
+     if g.unicode == u then
+      return( g )
+     end
+    end
+   end
+  end
+  fontloader.close(font)	
+ end
+return( nil )
+end
+
+function getkern ( a )
+ local g = getglyph2( FONT, a )
+ if g then
+  local k = g.boundingbox[3] - g.width
+   if k > 0 then
+    return( k )
+   end
+ end
+return( 0 )
+end
+
+function gkerntable( k, a )
+local fac = k + a
+ return( { ["dagger.sups"] = fac,
+  	    ["daggerdbl.sups"] = fac,
+    	    ["asterisk.sups"] = fac,
+            ["one.sups"] = fac,
+            ["two.sups"] = fac,
+	    ["three.sups"] = fac,
+	    ["four.sups"] = fac,
+	    ["five.sups"] = fac,
+   	    ["six.sups"] = fac,
+    	    ["seven.sups"] = fac,
+    	    ["eight.sups"] = fac,
+            ["nine.sups"] = fac,
+            ["zero.sups"] = fac,
+            ["quoteright"] = fac,
+            ["parenleft.sups"] = fac,
+            ["parenright"] = fac,
+            ["a.sups"] = fac,
+	    ["b.sups"] = fac,
+	    ["c.sups"] = fac,
+	    ["d.sups"] = fac,
+   	    ["e.sups"] = fac,
+    	    ["f.sups"] = fac,
+    	    ["g.sups"] = fac,
+            ["h.sups"] = fac,
+            ["i.sups"] = fac,
+            ["j.sups"] = fac,
+	    ["k.sups"] = fac,
+	    ["l.sups"] = fac,
+	    ["m.sups"] = fac,
+   	    ["n.sups"] = fac,
+    	    ["o.sups"] = fac,
+    	    ["p.sups"] = fac,
+            ["q.sups"] = fac,
+            ["r.sups"] = fac,
+            ["s.sups"] = fac,
+	    ["t.sups"] = fac,
+            ["u.sups"] = fac,
+            ["v.sups"] = fac,            
+	    ["w.sups"] = fac,
+	    ["x.sups"] = fac,
+   	    ["y.sups"] = fac,
+    	    ["z.sups"] = fac,
+    	    ["A.sups"] = fac,
+            ["B.sups"] = fac,
+            ["C.sups"] = fac,
+            ["D.sups"] = fac,
+	    ["E.sups"] = fac,
+	    ["F.sups"] = fac,
+	    ["G.sups"] = fac,
+   	    ["H.sups"] = fac,
+    	    ["I.sups"] = fac,
+    	    ["J.sups"] = fac,
+            ["K.sups"] = fac,
+            ["L.sups"] = fac,
+            ["M.sups"] = fac,
+	    ["N.sups"] = fac,
+	    ["O.sups"] = fac,
+	    ["P.sups"] = fac,
+   	    ["Q.sups"] = fac,
+    	    ["R.sups"] = fac,
+    	    ["S.sups"] = fac,
+            ["T.sups"] = fac,
+            ["U.sups"] = fac,
+            ["V.sups"] = fac,
+	    ["W.sups"] = fac,
+	    ["X.sups"] = fac,
+	    ["Y.sups"] = fac,
+   	    ["Z.sups"] = fac } )
+end	    
+
+local fkern = getkern( "f" )
+local Fkern = getkern( "F" )
+local Nkern = getkern( "N" )
+local Jkern = getkern( "J" )
+local Tkern = getkern( "T" )
+local Vkern = getkern( "V" )
+local vkern = getkern( "v" )
+local Ykern = getkern( "Y" )
+local ykern = getkern( "y" )
+local Ukern = getkern( "U" )
+
+
+local skerns = { ["f"] = gkerntable(fkern, 0),
+            ["F"] = gkerntable(Fkern, 0),
+            ["V"] = gkerntable(Vkern, 0),
+            ["v"] = gkerntable(vkern, 0),            
+            ["N"] = gkerntable(Nkern, 0),            
+            ["J"] = gkerntable(Jkern, 0),            
+	    ["T"] = gkerntable(Tkern, 50),
+	    ["Y"] = gkerntable(Ykern, 0),
+            ["U"] = gkerntable(Ukern, 0),
+            ["y"] = gkerntable(ykern, 0),
+ }
+
+fonts.handlers.otf.addfeature {
+ name = "superkerns",
+ type = "kern",
+ data = skerns
+}
+
+function putchar ( a )
+ local c = luaotfload.aux.slot_of_name(font.current(), a, false)
+ if c and type(c) == "number" then
+  tex.sprint( string.format( [[\char"%X]], c ))
+ else
+  tex.error("No character [ " .. a .. " ] in current font")
+ end
+end
+
+function getutfname ( a )
+ local g = getglyph( a )
+ if g then
+      return( g.name )
+ end
+return( nil )
+end
+
+function tosups ( a )
+ for i=1, unicode.utf8.len(a) do
+  local p = unicode.utf8.sub( a, i, i )
+  if p == " " then
+   tex.sprint( "\\ " )
+  else
+   local n = getutfname( p )
+   if n and type(n) == "string" then
+    putchar( n .. ".sups" )
+   end
+  end
+ end
+end
+
+\end{luacode}
+
+\def\realsuper#1{{\directlua{tosups("#1")}}}
+
+\setmainfont[Ligatures=TeX,
+Path=./fonts/,
+UprightFeatures={RawFeature=+superkerns},
+BoldFont=EBGaramond-SemiBold.ttf,
+ItalicFont=EBGaramond08-Italic.ttf,
+BoldItalicFont=EBGaramond-SemiBoldItalic.ttf,
+SlantedFont=EBGaramond08-Italic.ttf,
+BoldSlantedFont=EBGaramond-SemiBoldItalic.ttf,
+UprightFont=ECGaramond08-Regular.ttf]{ECGaramond08-Regular}
+
+\newenvironment{allsc}{%
+  \normalfont%
+  \addfontfeatures{RawFeature=+u2sc}%
+  \scshape%
+}{}
+
+\linespread{1}
+
+\newenvironment{vplace}{
+  \vspace*{\stretch{1}}
+}{
+  \vspace{\stretch{1}}
+}
+
+%% u2sc is only in customized ECGaramond08-Regular
+\def\scupcase{\normalfont\addfontfeatures{RawFeature=+u2sc}\scshape }
+\def\altnumber{\addfontfeatures{Numbers={Proportional,Lining}} }
+
+\newlength{\THINKERN}
+\setlength{\THINKERN}{0.16667em}
+\DeclareRobustCommand{\thinskip}{\hskip 0.16667em\relax}
+\DeclareRobustCommand{\thinkern}{\kern 0.16667em\relax}
+
+\DeclareRobustCommand{\tinyskip}{\hskip 0.1em\relax}
+\DeclareRobustCommand{\tinykern}{\kern 0.1em\relax}
+
+%% follow dash conventions, ie emdash left at right margin
+%% when breaking
+%% ellipsis does not do this.  Should it?
+\def\emdash{\unskip—\allowbreak\ignorespaces}
+
+\def\emdashSpaceAfter{\unskip{}—\space}
+
+\def\emdashEnd{\unskip{}—}
+\def\emdashStart{\leavevmode{}—\ignorespaces}
+\def\emdashSpaceBeforeAfter{\unskip\quad{}—\quad\ignorespaces}
+
+\def\emdashDialogBeg{—\ignorespaces}
+\def\emdashDialogEnd{\unskip—}
+
+\DeclareRobustCommand{\negtinykern}{\kern -0.3em\relax}
+\def\twoemdash{\unskip—\negtinykern —\space}
+
+\def\LeftCurlyQuote{“\tinykern\ignorespaces}
+\def\RightCurlyQuote{\unskip\unkern\tinykern{}”}
+
+\def\LeftCurlyQuoteS{‘\tinykern\ignorespaces}
+\def\RightCurlyQuoteS{\unskip\unkern\tinykern{}’}
+
+\DeclareRobustCommand{\ellipskip}{\hskip 0.1em\relax}
+\DeclareRobustCommand{\ellipkern}{\kern 0.1em\relax}
+
+\def\ellip{\ellipskip .\ellipkern .\ellipkern .}
+\def\ellipHold{\ellipkern .\ellipkern .\ellipkern .}
+
+\def\ellipsisSpaceAfter{\unskip\ellipHold\space}
+
+\def\ellipsis{\unskip\ellip\ellipskip\ignorespaces}
+
+\def\ellipsisendquote{\unskip\ellipHold\thinkern ”}
+
+\def\ellipsisComma{\unskip\ellipHold\ellipkern ,}
+\def\ellipsisQuestion{\unskip\ellipHold\ellipkern ?}
+\def\ellipsisPeriod{\unskip\ellipHold\ellipkern .}
+\def\ellipsisExclamation{\unskip\ellipHold\ellipkern !}
+
+\def\ellipsisEnd{\unskip\ellipHold\ignorespaces}
+
+\def\ellipsisSpaceBeforeAfter{\unskip\quad .\ellipkern .\ellipkern .\quad\ignorespaces}
+
+\def\ellipsisSpaceBefore{\unskip\quad .\ellipkern .\ellipkern .\ellipkern}
+
+\def\ellipsisNoBreak{\unskip\ellipHold\ellipkern\ignorespaces}
+\def\ellipsisOnlyLine{\ellip}
+
+\def\ellipsisStart{\leavevmode{}.\ellipkern .\ellipkern .\thinskip\ignorespaces}
+\def\ellipsisStartSpace{\leavevmode{}.\ellipkern .\ellipkern .\thinskip\ignorespaces\ }
+
+\def\ellipsisBracket{\unskip\thinkern[\ellipkern .\ellipkern .\ellipkern .\ellipkern]\thinkern\ignorespaces}
+\def\ellipsisBracketEnd{\unskip\thinkern[\ellipkern .\ellipkern .\ellipkern .\ellipkern]\ignorespaces}
+
+\def\ellipsisBracketMid{\unskip\thinkern{}[\ellipkern .\ellipkern .\ellipkern .\ellipkern]\thinkern\ignorespaces}
+
+\def\zeroJoinAllowBreak{\unskip\allowbreak\ignorespaces}
+\def\zeroJoinNoBreak{\unskip\ignorespaces}
+\def\dashJoinAllowBreak{\unskip -\allowbreak\ignorespaces}
+
+\def\rStartQuote{”\ignorespaces }
+\def\rEndQuote{\unskip\tinykern “}
+
+\def\makedots[#1]{\unskip\thinkern .\ellipkern .\multido{}{\numexpr #1 - 2\relax}{\ellipskip .}\thinskip\ignorespaces}
+
+\def\makedotsIsland[#1]{\unskip\thinskip .\ellipkern .\multido{}{\numexpr #1 - 2\relax}{\ellipskip .}\thinskip\ignorespaces}
+
+\def\makedotsEnd[#1]{\unskip\thinkern .\ellipkern .\multido{}{\numexpr #1 - 2\relax}{\ellipskip .}}
+
+\def\makedotsStart[#1]{\leavevmode\unskip .\ellipkern .\multido{}{\numexpr #1 - 2\relax}{\ellipskip .}\ignorespaces\ }
+
+\def\sixDots{\makedots[6]}
+\def\sevenDots{\makedots[7]}
+\def\nineDots{\makedots[9]}
+
+\def\fiveDots{\makedots[5]}
+\def\elevenDots{\makedots[11]}
+\def\elevenIslandDots{\makedotsIsland[11]}
+
+\def\fiveEndDots{\makedotsEnd[5]}
+\def\sevenEndDots{\makedotsEnd[7]}
+\def\fifteenEndDots{\makedotsEnd[15]}
+
+\def\twelveDots{\makedots[12]}
+\def\fifteenDots{\makedots[15]}
+\def\eighteenDots{\makedots[18]}
+\def\twentyoneDots{\makedots[21]}
+\def\fortytwoDots{\makedots[42]}
+\def\seventyfiveDots{\makedots[75]}
+
+\def\sixIslandDots{\makedotsIsland[6]}
+\def\twelveIslandDots{\makedotsIsland[12]}
+
+\def\sixEndDots{\makedotsEnd[6]}
+
+\def\nineEndDots{\makedotsEnd[9]}
+\def\nineStartDots{\makedotsStart[9]}
+
+\def\twelveEndDots{\makedotsEnd[12]}
+
+\def\eighteenEndDots{\makedotsEnd[18]}
+
+\def\twentyoneEndDots{\makedotsEnd[21]}
+
+\def\fortytwoEndDots{\makedotsEnd[42]}
+
+
+\def\hanging{\hangindent=2em\hangafter=1}
+
+\newenvironment{disableindent}{%
+\setlength{\parindent}{0pt}%
+\setlength{\parskip}{\baselineskip}%
+\vspace{-\baselineskip}%
+}{%
+}
+
+\newenvironment{disableIndentStretch}{%
+\setlength{\parindent}{0pt}%
+\setlength{\parskip}{1\baselineskip plus 2pt minus 2pt}%
+}{%
+\vspace{1\baselineskip plus 2pt minus 2pt}
+}
+
+
+\newenvironment{doublespacedpara}{%
+\setlength{\parskip}{\baselineskip}%
+}{%
+}
+
+\newenvironment{disableindentonly}{%
+\setlength{\parindent}{0pt}%
+}{%
+}
+
+
+\newenvironment{disableindentb}{%
+\setlength{\parindent}{0pt}%
+}{%
+}
+
+
+%% this isn't really a true monofont, some characters,
+%% such as [ and ] and ( and ), are off center
+\newfontfamily{\teletypefont}{LMTTMono8-Regular.ttf}[Path=./fonts/]
+\newfontfamily{\monofont}{LMTTMono8-Regular.ttf}[Path=./fonts/]
+\newfontfamily{\cryptofont}{monocrypto.ttf}[Path=./fonts/]
+
+\newenvironment{teletype}{%
+\setlength{\parindent}{0pt}\setlength{\parskip}{0em}
+\teletypefont
+\fontsize{8pt}{9pt}\selectfont
+}{%
+\normalsize
+}
+
+\newenvironment{teletypeB}{%
+\setlength{\parindent}{0pt}\setlength{\parskip}{0em}
+\teletypefont
+\fontsize{8pt}{9pt}\selectfont
+}{%
+\normalsize
+}
+
+\newcommand{\blankpage}{
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+}
+
+\newcommand{\blankpageB}{
+\thispagestyle{plain}
+\mbox{}
+\clearpage
+}
+
+\def\endpadpage{\clearpage{\thispagestyle{empty}\cleardoublepage\blankpage\blankpage}}
+
+
+\def\doCATCHLINE{%
+\begin{vplace}%
+\begin{center}%
+\begin{minipage}{.7\textwidth}%
+\rule{\textwidth}{.5\baselineskip}
+\par
+\vspace*{\baselineskip}
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+\vskip-\baselineskip
+\large
+\input{catchline.tex}
+\endgroup
+\vspace*{\baselineskip}
+\par
+\rule{\textwidth}{.5\baselineskip}
+\end{minipage}
+\end{center}
+\end{vplace}
+}
+
+
+\def\REALdoCOPYING{\input{copying.tex}}
+
+%%% underline thickness
+\setul{1pt}{.75pt}
+
+\def\FFbox#1{{\setlength{\fboxsep}{1pt}%
+\setlength{\fboxrule}{1pt}%
+\fbox{#1}}}
+
+\usepackage{needspace}
+
+\newcounter{ChapterCounter}
+\setcounter{ChapterCounter}{1}
+\def\chapterBreakN{\cleardoubleoddpage{\centering {\Huge \arabic{ChapterCounter}} \\}\vspace{7\baselineskip}\stepcounter{ChapterCounter}}
+
+
+\newlength{\LHangOn}
+
+\def\hangOn#1#2{%
+\settowidth{\LHangOn}{#2}
+\parshape 2 0pt \textwidth
+\dimexpr\LHangOn+#1\relax \dimexpr\textwidth-\LHangOn-#1\relax
+\noindent
+\mbox{#2}\kern#1\relax\ignorespaces}
+
+\emergencystretch 3em
+
+%\raggedbottom
+\flushbottom
+
+\newlength{\DOsectHEIGHT}
+\newlength{\DOsectMinHEIGHT}
+\newlength{\DOsectMaxHEIGHT}
+\newlength{\DOsectAVAIL}
+
+\def\DOsectionPUT#1#2#3{%
+\ifdim #1>0pt
+\vspace{#1}
+\fi
+\hfill #3 \hfill\null
+\ifdim #2>0pt
+\vspace{#2}
+\fi}
+
+\def\DOsectionBREAK#1#2#3{%
+\begingroup
+\settototalheight{\DOsectHEIGHT}{#3}
+\setlength{\DOsectMinHEIGHT}{\dimexpr\DOsectHEIGHT+#1}
+\setlength{\DOsectMaxHEIGHT}{\dimexpr\DOsectHEIGHT+#1+#2+2\baselineskip}
+\setlength{\DOsectAVAIL}{\dimexpr\pagegoal-\pagetotal-\baselineskip}
+\ifdim \DOsectAVAIL=\DOsectMaxHEIGHT
+    \DOsectionPUT{#1}{#2}{#3}
+\else
+    \ifdim \DOsectAVAIL>\DOsectMaxHEIGHT
+        \DOsectionPUT{#1}{#2}{#3}
+    \else
+        \ifdim \DOsectMinHEIGHT=\DOsectAVAIL
+            \DOsectionPUT{#1}{0pt}{#3}
+            \clearpage
+         \else
+            \ifdim \DOsectMinHEIGHT<\DOsectAVAIL
+                \DOsectionPUT{#1}{0pt}{#3}
+                \clearpage
+             \else      
+                \clearpage
+                \DOsectionPUT{0pt}{#2}{#3}                  
+             \fi
+         \fi
+     \fi
+\fi
+\endgroup}
+
+\usepackage{calc}
+
+%\widowpenalty=0
+\widowpenalty=10000
+%\widowpenalty=150
+%\widowpenalty=0
+%\displaywidowpenalty=0
+\displaywidowpenalty=10000
+\clubpenalty=0
+\brokenpenalty=10000
+
+\newlength{\BASIClines}
+\setlength{\BASIClines}{37\baselineskip}
+
+\newlength{\WEBleft}
+\setlength{\WEBleft}{.75in}
+
+\newlength{\WEBright}
+\setlength{\WEBright}{.75in}
+
+\newlength{\PRINTleft}
+\setlength{\PRINTleft}{.875in}
+
+\newlength{\PRINTright}
+\setlength{\PRINTright}{.625in}
+
+\newlength{\BOTTOM}
+\setlength{\BOTTOM}{.975in}
+
+\newlength{\TOP}
+\setlength{\TOP}{.55in}
+
+\newlength{\FOOTS}
+\setlength{\FOOTS}{.40in}
+
+\ifdefined\isPRINT
+\else
+\let\isPRINT=y
+\fi
+
+\ifx\isPRINT y
+    \geometry{footskip=\FOOTS,
+    left=\PRINTleft,
+    right=\PRINTright,
+    bottom=\BOTTOM,
+    textheight=\BASIClines,
+    heightrounded=true}
+\else
+    \geometry{footskip=\FOOTS,
+    left=\WEBleft,
+    right=\WEBright,
+    bottom=\BOTTOM,
+    textheight=\BASIClines,
+        heightrounded=true,
+        showframe=true}
+\fi
+
+\ifx\isPRINT y
+\else
+    \usepackage{pdfpages}
+\fi
+
+\def\MAYBEdoENDPAGE{%
+\ifx\isPRINT y
+    \endpadpage
+\fi
+}
+
+\def\openPRINTorWEB{%
+\ifx\isPRINT y
+    \blankpage\cleardoubleoddpage
+\else
+    \includepdf{cover.pdf}
+    \clearpage
+    \doCATCHLINE
+    \clearpage
+\fi
+}
+
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+
+\ifdefined\doSHOWFRAME
+\else
+\let\doSHOWFRAME=n
+\fi
+
+\ifx\doSHOWFRAME y
+    \usepackage{luatexbase}
+    \directlua{dofile("widow-assist.lua")}
+    \usepackage{showframe}
+\fi
+
+\ifdefined\doCOPYING
+\else
+\let\doCOPYING=n
+\fi
+
+\def\COPYING{%
+\ifx\doCOPYING y
+    \REALdoCOPYING
+\fi
+}
+

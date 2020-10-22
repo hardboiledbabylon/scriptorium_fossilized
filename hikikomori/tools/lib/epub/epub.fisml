@@ -1,0 +1,64 @@
+{PARA_HANG>}||<p class="hanging">||
+{<PARA_HANG}||</p>||
+
+{ADVENTURE>}||<div class="adventure">||
+{<ADVENTURE}||</div>||
+
+{SECTION0}||||
+{ASCII:'}||'||
+
+{TV>}||<span class="italic">||
+{<TV}||</span>||
+{SONG>}||<span class="italic">||
+{<SONG}||</span>||
+
+{TITLE>}||<div class="hikititle">||
+{<TITLE}||</div>||
+
+{<HANG_END}||</p>||
+{MARGIN_END}||</p>||
+
+{SECTION}||||
+{SUBSECTION}||||
+
+{42_ITALIC_A}||<span class="italic">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span>||
+
+{DEV>}||“<span class="italic">||
+{<DEV}||</span>”||
+
+{EMAIL>}||<div class="email">||
+{<EMAIL}||</div>||
+
+{::MUSIC_LONG::}||<div class="txt_img center"><img class="music_img center" alt="music play for a long time" src="music_long.jpg"/></div>||
+{::MUSIC_SHORT::}||<div class="txt_img"><img class="music_img center" alt="a short segment of music" src="music_short.jpg"/></div>||
+{::MUSIC_WAKE_TONE::}||<div class="txt_img"><img class="music_img center" alt="music" src="music_wake.jpg"/></div>||
+
+{SMALL>}||<span class="small">||
+{<SMALL}||</span>||
+{SMALLER>}||<span class="smaller">||
+{<SMALLER}||</span>||
+{SMALLEST>}||<span class="smallest">||
+{<SMALLEST}||</span>||
+
+{1ST_PARA>}||<p class="noindent pad_2em_top">||
+{<1ST_PARA}||</p>||
+
+{::SMILEY_ROBOT::}||<div class="txt_img center"><img class="robot_img center" alt="smiling robot" src="robot_smile.jpg"/></div>||
+{::TEARY_ROBOT::}||<div class="txt_img center"><img class="robot_img center" alt="crying robot" src="robot_cry.jpg"/></div>||
+{::FROWNY_ROBOT::}||<div class="txt_img center"><img class="robot_img center" alt="frowning robot" src="robot_frown.jpg"/></div>||
+{::POINT_ROBOT::}||<div class="txt_img center"><img class="robot_img center" alt="robot pointing" src="robot_point.jpg"/></div>||
+{::EMOJI_FRENZY_ROBOT::}|e|<div class="txt_img center"><img class="robot_img center" alt="robot emotionally breaking down 1" src="robot_emoji_frenzy_1.jpg"/></div>^M<div class="txt_img center"><img class="robot_img center" alt="robot emotionally breaking down 2" src="robot_emoji_frenzy_2.jpg"/></div>^M<div class="txt_img center"><img class="robot_img center" alt="robot emotionally breaking down 3" src="robot_emoji_frenzy_3.jpg"/></div>^M<div class="txt_img center"><img class="robot_img center" alt="robot emotionally breaking down 4" src="robot_emoji_frenzy_4.jpg"/></div>^M<div class="txt_img center"><img class="robot_img center" alt="robot emotionally breaking down 5" src="robot_emoji_frenzy_5.jpg"/></div>^M<div class="txt_img center"><img class="robot_img center" alt="robot emotionally breaking down 6" src="robot_emoji_frenzy_6.jpg"/></div>^M<div class="txt_img center"><img class="robot_img center" alt="robot emotionally breaking down 7" src="robot_emoji_frenzy_7.jpg"/></div>^M<div class="txt_img center"><img class="robot_img center" alt="robot emotionally breaking down and appearing to have gone terminal" src="robot_emoji_frenzy_8.jpg"/></div>^M||
+
+{::MANIC_UNSUBSCRIBE::}||<div class="pad_1em_top pad_1em_bot"><p class="center f225">UNSUBSCRIBE</p><p class="center f200">UNSUBSCRIBE</p><p class="center f175">UNSUBSCRIBE</p><p class="center f150">UNSUBSCRIBE</p><p class="center f125">UNSUBSCRIBE</p><p class="center">UNSUBSCRIBE</p><p class="center small">UNSUBSCRIBE</p><p class="center smaller">UNSUBSCRIBE</p><p class="center smallest">UNSUBSCRIBE</p></div>||
+
+{::GARDEN1::}||<div class="txt_img center"><img class="garden_img center" alt="resplendent hedges" src="garden1.jpg"/></div>||
+
+{VIDEO>}||<span class="italic">||
+{<VIDEO}||</span>||
+
+{NEWS>}||“<span class="italic">||
+{<NEWS}||</span>”||
+
+{DROP>}||<span class="dropcap">||
+{<DROP}||</span>||
+{@@NEWPAGE@@}||||

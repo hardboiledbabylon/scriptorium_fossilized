@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <title>###TITLE###</title>
+  <link rel="stylesheet" href="style.css" type="text/css"/>
+  
+</head>
+
+<body>
+
+  <div class="f200 center bold pad_1em_bot nohyph">###TITLE###</div>
+
+  <div class="center f150 bold pad_1em_top pad_2em_bot nohyph">###NOM_DE_GUERRE###</div>
+
+  <div class="center pad_2em_top nohyph">Copyright © ###COPYRIGHT_YEAR### by ###NOM_DE_GUERRE###</div>
+
+  <div class="center nohyph">All rights reserved.</div>
+
+  <div class="legalese pad_5em">###LEGALESE###</div>
+
+  <div class="center pad_5em_bot">###SERIAL###</div>
+
+  <div class="center pad_2em_bot">###IMPRINT###</div>
+
+  <div class="center pad_1em_top nohyph">###WEBSITE###</div>
+
+  <div class="center pad_1em_top pad_5em_bot nohyph">###EMAIL###</div>
+
+
+<div class="center nohyph crypto">___SUM5___</div>
+  
+<div class="center nohyph crypto">___SUM4___</div>
+
+<div class="center nohyph crypto">___SUM3___</div>
+
+<div class="center nohyph crypto">___SUM2___</div>
+
+<div class="center nohyph crypto">___SUM1___</div>
+
+</body>
+
+</html>

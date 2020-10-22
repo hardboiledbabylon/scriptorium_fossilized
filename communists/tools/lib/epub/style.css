@@ -1,0 +1,132 @@
+
+body {
+    margin: auto;
+    width: auto;
+    widows: 1;
+    orphans: 1;
+}
+.pad_1em_top {
+    padding-top: 1em;
+}
+.pad_2em_top {
+    padding-top: 2em;
+}
+.pad_1em_bot {
+    padding-bottom: 1em;
+}
+.pad_1em_topbot {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.pad_2em_bot {
+    padding-bottom: 2em;
+}
+.pad_5em {
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+.pad_5em_bot {
+  padding-bottom: 5em;
+}
+.f150 {
+    font-size: 150%;
+}
+.f200 {
+    font-size: 200%;
+}
+.smallcaps {
+    font-size: 80%;
+    font-style: normal;
+}
+.bold {
+    font-weight: bold;
+}
+.italic {
+    font-style: italic;
+}
+div.right_align p {
+    text-align: right;
+}
+.right_align {
+    text-align: right;
+}
+div, p, pre, h1, h2, h3, h4, h5, h6 {
+    margin-left: 0;
+    margin-right: 0;
+}
+div {
+    line-height: 150%;
+    text-align: justify;
+}
+p {
+    line-height: 150%;
+    margin: 0 auto 0.2em;
+    text-align: justify;
+    text-indent: 2em;
+}
+p.noindent {
+    text-indent: 0;
+}
+.preamble {
+    text-indent: 0;
+    margin-left: 15%;
+}
+.preamble p {
+    text-indent: 0;
+}
+.interject {
+    margin-left: 10%;
+}
+div.noindent p {
+    text-indent: 0;
+    margin-bottom: 1em;
+}
+.negative_space {
+    margin-top: -1em;
+}
+.center {
+    text-align: center;
+    text-indent: 0;
+}
+img.cover {
+    width: auto;
+    height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.legalese {
+    text-indent: 0;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+img.text_img {
+    height: 1.5em;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+p.dedication {
+    text-indent: 0;
+}
+div.title {
+    font-size: 150%;
+    text-align: left;
+    font-weight: bold;
+    margin-right: 25%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    line-height: 100%;
+}
+.nohyph{
+    hyphens: none;
+    adobe-hyphenate: none;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    -epub-hyphens: none;
+}
+div.crypto {
+    font-size: 1%;
+}

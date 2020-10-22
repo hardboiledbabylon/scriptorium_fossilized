@@ -1,0 +1,898 @@
+# Copyright © 2018 by D. F. Hall <authorfunction@hardboiledbabylon.com>
+
+# Permission to use, copy, modify, and/or distribute this software for
+# any purpose with or without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies.
+
+# THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL
+# WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+# AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA
+# OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+# TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+
+####    USAGE    ####
+#### project info
+#### load library
+#### define custom hooks
+#### call main
+
+# set -E
+# trap 'exit' ERR
+# exit on error
+# print all executed lines
+# Not ideal, but this is the best error trapping
+# that can be done with old versions of bash
+set -e -x
+set -o pipefail
+#subshells?
+
+# index offsets for UUID array in compile files
+ID_PRINT=0
+ID_EPUB=1
+
+DRAFT_COLUMN=1
+DRAFT_NO_SENTENCE=0
+DRAFT_LANDSCAPE=0
+DRAFT_NO_MONO=0
+USE_COPYING=0
+USE_SERIES=0
+NO_CLEAN_WDIR=0
+
+#DRAFT_FMT_CMD='gfmt -p '{!!}' -s -w 52 -t'
+#DRAFT_FMT_CMD='gfold -s -w 52'
+# width has to be actualy width plus one for newline
+# or lines that are exactly width in source file
+# will be wrapped by this
+#DRAFT_FMT_CMD='gfmt -w 63 -s | gfold -w 63'
+
+# fisml_lib to test for .fisml.conf
+# and set up draft columns
+DRAFT_COLS=$(fisml_conf.pl COLS)
+DRAFT_MAX_WIDTH=$((DRAFT_COLS + 1))
+#DRAFT_FMT_CMD="gfold -w $DRAFT_MAX_WIDTH -s"
+DRAFT_FMT_CMD="fisml_comment_fold.pl"
+#DRAFT_FMT_CMD='cat'
+
+SED_CMD='gsed'
+# bsd sed require -i '' to work properly
+SEDi_CMD='gsed -i'
+FOLD_CMD='gfold'
+GREP_CMD='ggrep'
+FGREP_CMD='ggrep -F'
+CAT_CMD='cat'
+
+RUN_CMD='bash -c'
+
+WDIR_BASE="_working_"
+OUTPUT_DIR_BASENAME="_output_"
+
+# reset this after loading this file in
+# compile.sh if necessary
+USE_ASCII="--ascii"
+
+ROOT=$(pwd)
+BIN="${ROOT}/tools/bin"
+LIB="${ROOT}/tools/lib"
+
+WDIR="${ROOT}/${WDIR_BASE}"
+
+OUTPUT_DIR="${ROOT}/${OUTPUT_DIR_BASENAME}"
+
+if test $# -lt 1
+then
+    echo "give options"
+    exit 1
+fi
+
+function IF_EXISTS () {
+    if test -f "${1}"
+    then
+        echo "${1}"
+    fi    
+}
+
+# there should be no need of a local copy of any
+# unicode mappings
+UNICODE=$(IF_EXISTS "${LIBRARY}/unicode/unicode.fisml")
+# placeholders are always local
+GLOBAL_PLACEHOLDERS=$(IF_EXISTS "${LIBRARY}/placeholders.fisml")
+LOCAL_PLACEHOLDERS=$(IF_EXISTS "${LIB}/placeholders.fisml")
+
+function FULLPATH () {
+    if ! test -d "${1}"
+    then
+        echo "${1} is not a directory"
+        exit 1
+    fi
+    echo "$(cd "${1}" && pwd)"
+}
+
+function QUOTEMETA () {
+    perl -e '$_=<STDIN>; chomp; print quotemeta;'
+}
+
+function clean {
+    rm -rf "${WDIR}"
+}
+
+function deep_clean {
+    rm -rf "${WDIR}" "${OUTPUT_DIR}"
+}
+
+function FISML_APPLY () {
+
+    local TARGET="${1}"
+    local INPUT="${2}"
+
+    local TRS_LOCAL=$(IF_EXISTS "${LIB}/${TARGET}/${TARGET}.trs")
+    local FISML_LOCAL=$(IF_EXISTS "${LIB}/${TARGET}/${TARGET}.fisml")
+    
+    echo "${INPUT}" | \
+        fisml_do.pl -f "${GLOBAL_PLACEHOLDERS}" \
+                    -f "${LOCAL_PLACEHOLDERS}" | \
+	fisml_trs.pl -f "${LIBRARY}/${TARGET}/${TARGET}.trs" \
+                     -f "${TRS_LOCAL}" | \
+	fisml_do.pl -f "${UNICODE}" \
+                    -f "${LIBRARY}/${TARGET}/${TARGET}.fisml" \
+                    -f "${FISML_LOCAL}" | \
+	QUOTEMETA
+}
+
+function MK_VARIABLES () {
+
+    local FILE="${1}"
+    local TARGET="${2}"
+    local NAME="${3}"
+
+    TITLE=$(FISML_APPLY "${TARGET}" \
+			"$(fisml_get_attr.pl "${FILE}" title)")
+
+    NOM=$(FISML_APPLY "${TARGET}" \
+		      "$(fisml_get_attr.pl "${FILE}" "nom de guerre" | \
+                      		    perl -pe 's/\. /.{THINSPACE}/;')")
+
+    F_DEDICATION=$(FISML_APPLY "${TARGET}" "${DEDICATION}")
+
+    F_EMAIL=$(FISML_APPLY "${TARGET}" "${EMAIL}")
+
+    F_IMPRINT=$(FISML_APPLY "${TARGET}" "${IMPRINT}")
+
+    F_WEBSITE=$(FISML_APPLY "${TARGET}" "${WEBSITE}")
+
+    LEGALESE=$(FISML_APPLY "${TARGET}" \
+                           "$(unbreak.pl \
+                           <"${LIBRARY}/universal/legalese.txt")" )
+    
+    if test "$(IF_EXISTS ${LIB}/legalese.txt)" != ""
+       then
+           LEGALESE=$(FISML_APPLY "${TARGET}" \
+                      "$(unbreak.pl <"${LIB}/legalese.txt")" )
+    fi
+
+    if test "${SERIAL}" ==  ""
+    then
+        if test "$(IF_EXISTS ${LIB}/universal/${NAME}/serial.txt)" != ""
+        then
+            read -s F_SERIAL <"${LIB}/universal/${NAME}/serial.txt"
+        fi
+    else
+        F_SERIAL=$(FISML_APPLY "${TARGET}" "${SERIAL}")
+    fi
+}
+
+function ENTER_REAL_WKDIR () {
+    cd "${1}"
+
+    rm -rf "${2}"
+    mkdir "${2}"
+
+    cd "${2}"
+}
+
+# default
+# take stream from stdin and pass to stdout
+function fisml_pre_filter_hook () {
+    cat
+}
+
+# rmspcpttn here is usually just '{+++}'
+# to un-separate paragraphs
+# run it first to make sure fisml_unabbrev actually
+# knows where paragraphs end
+# this is true for latex & epub
+function FISML_BUILTIN_PRE_FILTER () {
+    local SPC_PATT_LOCAL=$(IF_EXISTS "${LIB}/universal/space_patterns.def")
+    
+    rmspcpttn.pl <"${1}" \
+                 -f "${LIBRARY}/universal/space_patterns.def" \
+                 -f  "${SPC_PATT_LOCAL}" | \
+        fisml_unabbrev.pl
+
+}
+
+# isn't going to pick pre_filters from other things
+# should be run absolute dead last before tags are
+# made non-fisml
+function FISML_TEST () {
+
+    local INPUT="${1}"
+    local TARGET="${2}"
+    
+    local TRS_LOCAL=$(IF_EXISTS "${LIB}/${TARGET}/${TARGET}.trs")
+    local FISML_LOCAL=$(IF_EXISTS "${LIB}/${TARGET}/${TARGET}.fisml")
+    
+    local ERR=$(cat "${INPUT}" | \
+		    fisml_do.pl -f "${GLOBAL_PLACEHOLDERS}" \
+                                -f "${LOCAL_PLACEHOLDERS}" | \
+		    fisml_trs.pl -f "${LIBRARY}/${TARGET}/${TARGET}.trs" \
+                                 -f "${TRS_LOCAL}" | \
+		    fisml_do.pl -B \
+                                -f "${UNICODE}" \
+                                -f "${LIBRARY}/${TARGET}/${TARGET}.fisml" \
+                                -f "${FISML_LOCAL}" | \
+		    fisml_tags.pl)
+
+    if test "${ERR}" != ""
+    then
+	echo '#######   TAGS STILL EXTANT IN OUTPUT   #######'
+	echo 'TAGS:'
+	echo "${ERR}"
+	exit 1;
+    fi
+}
+
+function USE_WHICH () {
+
+    local TARGET="${1}"
+    local WHAT="${2}"
+
+    if test -f "${LIB}/${TARGET}/${WHAT}"
+    then
+       echo "${LIB}/${TARGET}/${WHAT}"
+    else
+        echo "${LIBRARY}/${TARGET}/${WHAT}"
+    fi
+}
+
+function mk_pdf_draft {
+
+    local INPUT="${1}"
+    local FILE="${2}"
+    local OUT_D="${3}"
+    local DRAFT="${FILE}_draft.latex"
+    local DRAFT_FOLD=0
+
+    local DRAFT_MONO_FONT="LMMonoDraft8-Regular"
+    local DRAFT_PROP_FONT="EBGaramond08-Regular"
+    local DRAFT_FONT="${DRAFT_MONO_FONT}"
+
+    if test $DRAFT_NO_MONO -ne 0
+    then
+        DRAFT_FONT="${DRAFT_PROP_FONT}"
+    fi
+
+    # {!!}{@}{col}52
+    if test $DRAFT_COLUMN -eq 2
+    then
+        # non-comment lines
+        if fisml_lint.pl <"${INPUT}" | \
+                ${GREP_CMD} ", > [0-9][0-9]* columns" >/dev/null
+        then
+            echo "MORE THAN $DRAFT_MAX_WIDTH COLUMNS IN TWO-COLUMN DRAFT MODE"
+            exit 1;
+        fi
+    fi
+
+    cd "${WDIR}"
+
+    local draft_lmargin='1in'
+    local draft_rmargin='1in'
+    local draft_column=""
+    local draft_landscape=""
+    local draft_font_ex='\draftfont'
+
+    if test $DRAFT_COLUMN -eq 2
+    then
+        draft_column=",twocolumn"
+        draft_font_ex='\draftfont\fontsize{8}{9.75}\selectfont'
+        
+        draft_lmargin=.5in
+        draft_rmargin=.5in
+    fi
+    if test $DRAFT_LANDSCAPE -eq 1
+    then
+        draft_landscape=",landscape"
+                
+        if test $DRAFT_COLUMN -eq 2
+        then
+            draft_font_ex='\draftfont\fontsize{9}{10.5}\selectfont'
+            
+            draft_lmargin=1in
+            draft_rmargin=1in
+        fi
+    fi
+    
+    printf '\\documentclass[fontsize=9pt%s%s]{article}\n' \
+           "${draft_column}" "${draft_landscape}" >"${DRAFT}"
+    
+    printf '\\usepackage{fontspec}\n' >>"${DRAFT}"
+    printf '\\usepackage{geometry}\n' >>"${DRAFT}"
+
+    printf '\\geometry{left=%s,right=%s,top=1in,bottom=1in}\n' \
+           "${draft_lmargin}" "${draft_rmargin}" \
+           >>"${DRAFT}"
+    
+    printf '\\setmainfont[Path=%s]{%s}\n' \
+           "./fonts/" "${DRAFT_FONT}.ttf" >>"${DRAFT}"    
+    printf '\\newfontfamily{\\draftfont}{%s}[Path=%s]\n' \
+           "${DRAFT_FONT}.ttf" "./fonts/" >>"${DRAFT}"
+    printf '\\makeatletter\n' >>"${DRAFT}"
+    
+    printf '\\renewcommand{\\verbatim@font}{%s}\n' \
+           "${draft_font_ex}" \
+           >>"${DRAFT}"
+
+    if test $DRAFT_COLUMN -eq 2
+    then
+        printf '\\setlength{\\columnsep}{.25in}\n' >>"${DRAFT}"
+    fi
+    
+    printf '\\makeatother\n' >>"${DRAFT}"
+    printf '\\begin{document}\n\\begin{verbatim}\n\n' >>"${DRAFT}"
+
+    mkdir fonts
+    cp "${LIBRARY}/fonts/${DRAFT_FONT}.ttf" fonts/
+
+    if test $DRAFT_NO_SENTENCE -ne 0
+    then
+        ${RUN_CMD} "${DRAFT_FMT_CMD}" <"${INPUT}" | \
+            ${SED_CMD} -e 's/^{}//' -e 's/{}/ /g' >>"${DRAFT}"
+    else
+        ${RUN_CMD} "${DRAFT_FMT_CMD}" <"${INPUT}" >>"${DRAFT}"
+    fi
+
+    printf '\n\n\\end{verbatim}\n\\end{document}\n' >>"${DRAFT}"
+
+    lualatex -halt-on-error -interaction=nonstopmode "${DRAFT}"
+
+    rm -rf "${OUT_D}/${FILE}_draft.pdf"
+    cp "${FILE}_draft.pdf" "${OUT_D}/"
+}
+
+# default
+# pass through
+function latex_pre_filter_hook () {
+    cat
+}
+# default
+function fisml_to_target () {
+
+    local TARGET="${1}"
+
+    local TRS_LOCAL=$(IF_EXISTS "${LIB}/${TARGET}/${TARGET}.trs")
+    local FISML_LOCAL=$(IF_EXISTS "${LIB}/${TARGET}/${TARGET}.fisml")
+    
+    fisml_do.pl -f "${GLOBAL_PLACEHOLDERS}" \
+                -f "${LOCAL_PLACEHOLDERS}" | \
+	fisml_trs.pl -f "${LIBRARY}/${TARGET}/${TARGET}.trs" \
+                     -f "${TRS_LOCAL}" | \
+	fisml_do.pl -f "${UNICODE}" \
+                    -f "${LIBRARY}/${TARGET}/${TARGET}.fisml" \
+                    -f "${FISML_LOCAL}"
+}
+
+function mk_latex () {
+
+    local INPUT="${1}"
+    local FILE="${2}"
+    local OUT_D="${3}"
+    local MEDIA="${4}"
+
+    local OUTPUT_TARGET=""
+    
+    ENTER_REAL_WKDIR "${WDIR}" "${FILE}"
+
+    if test "${MEDIA}" != "print"
+    then
+        cp "${LIB}/latex/pdfpages/${FILE}/cover_web.pdf" "cover.pdf"
+        if test "${CATCHLINE}" !=  ""
+        then
+            echo "${CATCHLINE}" >catchline.tex
+        else
+            if test "$(IF_EXISTS ${LIB}/latex/catchline/${FILE}/catchline.tex)" != ""
+            then
+                cp ${LIB}/latex/catchline/${FILE}/catchline.tex .
+            else
+                echo "CATCHLINE MISSING?"
+                exit 1
+            fi
+        fi
+    fi
+
+    local FILTERED=$(mktemp "${FILE}.XXXXXX") || exit 1
+
+    FISML_BUILTIN_PRE_FILTER "${INPUT}" | fisml_pre_filter_hook | \
+	latex_pre_filter_hook >"${FILTERED}"
+
+    FISML_TEST "${FILTERED}" "latex"
+
+    fisml_to_target "latex" <"${FILTERED}" >body.tex
+
+    MK_VARIABLES "${INPUT}" "latex" "${FILE}"
+
+    fisml_do.pl <"${FILTERED}" \
+                -f "${GLOBAL_PLACEHOLDERS}" \
+                -f "${LOCAL_PLACEHOLDERS}" | \
+        fisml_hyphen.pl >"hyphenates.tex"
+
+    ${SED_CMD} <"$(USE_WHICH "latex" "latex_book.frontmatter")" \
+	-e "s/###COPYRIGHT_YEAR###/${COPYRIGHT_YEAR}/" \
+	-e "s/###IMPRINT###/${F_IMPRINT}/" \
+	-e "s/###DEDICATION###/${F_DEDICATION}/" \
+	-e "s/###EMAIL###/${F_EMAIL}/" \
+	-e "s/###WEBSITE###/${F_WEBSITE}/" \
+	-e "s/###NOM_DE_GUERRE###/${NOM}/" \
+	-e "s/###TITLE###/${TITLE}/" \
+	-e "s/###LEGALESE###/${LEGALESE}/" \
+        -e "s/###SERIAL###/${F_SERIAL}/" \
+	>"frontmatter.tex"
+
+    cp "${LIBRARY}/latex/common.tex" .
+    cp "${LIB}/latex/latex_book.skel" main.tex
+
+    rm -rf "${OUT_D}/${FILE}"
+    mkdir "${OUT_D}/${FILE}"
+    cp *.tex "${OUT_D}/${FILE}"
+    if test "${MEDIA}" != "print"
+    then
+        cp cover.pdf "${OUT_D}/${FILE}"
+    fi
+
+}
+
+function mk_pdf () {
+
+    local INPUT="${1}"
+    local FILE="${2}"
+    local OUT_D="${3}"
+    local MEDIA="${4}"
+
+    # INPUT is a directory containing .tex files
+
+    ENTER_REAL_WKDIR "${WDIR}" "${FILE}"
+
+    cp "${INPUT}"/* .
+
+    mkdir -p fonts
+    if test -d "${LIBRARY}/fonts"
+    then
+        cp "${LIBRARY}/fonts"/* fonts
+    fi
+    if test -d "${LIB}/fonts"
+    then
+        cp "${LIB}/fonts"/* fonts
+    fi
+
+    ### common.tex sets \isPRINT to y by default
+    local TEX_TARG='\input'
+    
+    if test "${MEDIA}" != "print"
+    then
+        TEX_TARG='\let\isPRINT=n \input'
+    fi
+
+    lualatex -halt-on-error -interaction=nonstopmode \
+             -jobname="${FILE}" \
+             "${TEX_TARG}" main.tex
+
+     if ${FGREP_CMD} 'Some font shapes were not available' "${FILE}.log"
+     then
+	 echo '###############################################'
+	 echo '#######   FONT  SHAPES  NOT AVAILABLE   #######'
+	 echo '###############################################'
+	 exit 1
+     fi
+
+     # pdf-x3
+     if test "${MEDIA}" = "print"
+     then
+         # warning if /usr/local/ghostscript/X.XX/lib/PDFX_def.ps
+         # exists it overrides the file of the same name
+         # in the current directory, so be sure to use a
+         # name other than PDFX_def.ps
+         ${SED_CMD} <"${LIBRARY}/latex/PDFX_def.ps" \
+                    -e "s/###TITLE###/${TITLE}/" \
+                    >pdfx.ps
+
+         # ghostscript only produces pdf/x-3 but most places
+         # seem to accept it in place of pdf/x-1a
+         # no profile should be embedded for enteriors
+         # that are just text
+         gs -SDEVICE=pdfwrite -sOutputFile="${FILE}.pdfx" \
+            -sColorConversionStrategy=Gray -dNOPAUSE \
+            -dBATCH -dPDFX pdfx.ps "${FILE}.pdf"
+         
+         cp "${FILE}.pdfx" "${FILE}.pdf"
+
+         local NPAGES=$(pdfinfo "${FILE}.pdf" | \
+                            grep Pages | \
+                            sed 's/^Pages: *//')
+         
+         if (( "${NPAGES}" % 2 != 0 ))
+         then
+             echo "PAGE COUNT OF PRINT BOOKS SHOULD BE DIVISIBLE BY 2"
+             exit 1
+         fi
+     else
+         # since pdf_web covers are usually stored at
+         # 300dpi, downscale to decrease file size
+         # pdf 1.4 seems generally smaller than 1.3
+         gs -dNOPAUSE -dBATCH  -sDEVICE=pdfwrite \
+            -dPDFSETTING=/ebook -dCompatibilityLevel=1.4 \
+            -dColorImageDownsampleType=/Bicubic \
+            -dGrayImageDownsampleType=/Bicubic \
+            -dMonoImageDownsampleType=/Bicubic \
+            -sOutputFile="${FILE}.pdfa" "${FILE}.pdf"
+
+         cp "${FILE}.pdfa" "${FILE}.pdf"
+     fi
+
+     rm -rf "${OUT_D}/${FILE}.pdf"
+     cp "${FILE}.pdf" "${OUT_D}/"
+}
+
+function FSML_BUILTIN_PRE_EPUB_HOOK () {
+    local SPC_PATT_LOCAL=$(IF_EXISTS "${LIB}/epub/space_patterns.def")
+    
+    rmspcpttn.pl -f "${LIBRARY}/epub/space_patterns.def" \
+                 -f  "${SPC_PATT_LOCAL}" | \
+        ${SED_CMD} -e "s/{'}{''}/{'} {''}/g" \
+                   -e "s/{''}{'}/{''} {'}/g"
+}
+
+# default
+function epub_post_split_hook () {
+    echo "DUMBY EPUB_POST_SPLIT_HOOK"
+}
+
+#default
+function epub_pre_split_hook {
+    cat
+}
+
+# produce a series of output files in current working directory
+function epub_split_hook {
+    fsplit.pl '^{CHAPTER}' 'chapter' 'Chapter'
+}
+
+function epub_pre_filter_hook {
+    cat
+}
+
+function epub_pre_pack_hook () {
+
+    . "${LIBRARY}/boo.shlib"
+
+    boo_prefill "${1}"
+
+    boo_sect_loop "chapter_*.html"
+
+}
+
+function mk_epub {
+
+    local INPUT="${1}"
+    local FILE="${2}"
+    local OUT_D="${3}"
+
+    ENTER_REAL_WKDIR "${WDIR}" "${FILE}"
+
+    MK_VARIABLES "${INPUT}" "epub" "${FILE}"
+
+    FISML_BUILTIN_PRE_FILTER "${INPUT}" | fisml_pre_filter_hook | \
+	FSML_BUILTIN_PRE_EPUB_HOOK | epub_pre_filter_hook | \
+        epub_pre_split_hook | epub_split_hook
+
+    epub_post_split_hook
+
+    local TRS_LOCAL=$(IF_EXISTS "${LIB}/epub/epub.trs")
+    local FISML_LOCAL=$(IF_EXISTS "${LIB}/epub/epub.fisml")
+
+    # only book chapters should be here
+    for chap in $(find . -type f -print)
+    do
+        FISML_TEST "${chap}" "epub"
+        fisml_to_target "epub" <"${chap}" | \
+	    ${SED_CMD} -e 's/^  *//' -e 's/  *$//' | \
+	    partial_txt_to_html.pl >"${chap}.tmp"
+
+        SECTION_TITLE=$(fisml_get_attr.pl "${chap}" split_name)
+
+	${SED_CMD} <"$(USE_WHICH "epub" "xhtml_chapter.skel")" \
+	    -e "/###BODY###/ r ${chap}.tmp" \
+	    -e '/###BODY###/d' \
+	    -e "s/###TITLE###/${SECTION_TITLE}/" \
+	    >"${chap}.html"
+
+	rm "${chap}.tmp" "${chap}"
+    done
+    
+    cp "${LIB}/epub/images/${FILE}/cover.jpg" cover.jpg
+
+    if test -d "${LIB}/epub/images/${FILE}/interior"
+    then
+	cp "${LIB}/epub/images/${FILE}/interior/"* .
+    fi
+
+    if test -d "${LIB}/epub/extra/${FILE}"
+    then
+	cp "${LIB}/epub/extra/${FILE}/"* .
+    fi
+
+    cp "$(USE_WHICH "epub" "style.css")" style.css
+
+    ${SED_CMD} <"$(USE_WHICH "epub" "cover.html")" \
+	       -e "s/###TITLE###/${TITLE}/" \
+	       >"cover.html"
+
+    if test $USE_COPYING -ne 0
+    then
+        cp "${LIBRARY}/epub/copying.html" .
+    fi
+    
+    ${SED_CMD} <"$(USE_WHICH "epub" "epub.frontmatter")" \
+	-e "s/###COPYRIGHT_YEAR###/${COPYRIGHT_YEAR}/" \
+	-e "s/###IMPRINT###/${F_IMPRINT}/" \
+	-e "s/###DEDICATION###/${F_DEDICATION}/" \
+	-e "s/###EMAIL###/${F_EMAIL}/" \
+	-e "s/###WEBSITE###/${F_WEBSITE}/" \
+	-e "s/###NOM_DE_GUERRE###/${NOM}/" \
+	-e "s/###TITLE###/${TITLE}/" \
+	-e "s/###LEGALESE###/${LEGALESE}/" \
+        -e "s/###SERIAL###/${F_SERIAL}/" \
+	>titlepage.html
+
+        ${SED_CMD} <"$(USE_WHICH "epub" "epub.halftitle")" \
+	-e "s/###TITLE###/${TITLE}/" \
+	>halftitle.html
+
+    ${SED_CMD} <"$(USE_WHICH "epub" "epub.dedication")" \
+	       -e "s/###DEDICATION###/${F_DEDICATION}/" \
+               -e "s/###TITLE###/${TITLE}/" \
+	       >"dedication.html"
+
+    epub_pre_pack_hook "${ROOT}/${FILE}.txt" >"${WDIR}/${FILE}.boo"
+    
+    boo2toc.pl "${WDIR}/${FILE}.boo"
+
+    gen_epub_meta.sh
+
+    zip_epub.sh "${FILE}.epub"
+
+    rm -rf "${OUT_D}/${FILE}.epub"
+    cp -r "${FILE}.epub" "${OUT_D}/"
+
+}
+
+
+# shadow these if an output doesn't exist
+# for this project
+function pre_pdf_print_hook {
+    echo 'DOING PDF PRINT'
+}
+
+function pre_pdf_web_hook {
+    echo 'DOING PDF WEB'
+}
+
+function pre_pdf_draft_hook {
+    echo 'DOING PDF DRAFT'
+}
+
+function pre_latex_print_hook {
+    echo 'DOING LATEX'
+}
+
+function pre_latex_web_hook {
+    echo 'DOING LATEX'
+}
+
+function pre_epub_hook {
+    echo 'DOING EPUB'
+}
+
+function pre_epub_img_hook {
+    echo 'DOING EPUB IMG'
+}
+
+function pre_mobi_hook {
+    echo 'DOING MOBI'
+}
+
+function mk_actual_latex_pdf () {
+
+    local R="${1}"
+    local ODIR="${2}"
+    local MEDIA="${3}"
+    local F="${4}"
+    local TYPE="${5}"
+
+    mkdir -p "${ODIR}/latex/${MEDIA}"
+    mk_latex "${R}/${F}.txt" "${F}" "${ODIR}/latex/${MEDIA}" "${MEDIA}"
+    
+    if test "${TYPE}" = "pdf"
+    then
+	mkdir -p "${ODIR}/pdf/${MEDIA}"
+        mk_pdf "${ODIR}/latex/${MEDIA}/${F}" "${F}" \
+               "${ODIR}/pdf/${MEDIA}" "${MEDIA}"
+    fi
+}
+
+__mk_pdf_draft () {
+    pre_pdf_draft_hook
+    mkdir -p "${OUTPUT_DIR}/pdf/draft"
+    mk_pdf_draft "${ROOT}/${1}.txt" "${1}" \
+		 "${OUTPUT_DIR}/pdf/draft"
+}
+
+__mk_pdf_print () {
+    pre_pdf_print_hook
+    mk_actual_latex_pdf "${ROOT}" "${OUTPUT_DIR}" \
+			"print" "${1}" "pdf"
+}
+
+__mk_pdf_web () {
+    pre_pdf_web_hook
+    mk_actual_latex_pdf "${ROOT}" "${OUTPUT_DIR}" \
+			"web" "${1}" "pdf"
+}
+
+__mk_latex_print () {
+    pre_latex_print_hook
+    mk_actual_latex_pdf "${ROOT}" "${OUTPUT_DIR}" \
+			"print" "${1}" "latex"
+}
+
+__mk_latex_web () {
+    pre_latex_web_hook
+    mk_actual_latex_pdf "${ROOT}" "${OUTPUT_DIR}" \
+			"web" "${1}" "latex"
+}
+
+__mk_epub () {
+    pre_epub_hook
+    mkdir -p "${OUTPUT_DIR}/epub"
+    mk_epub "${ROOT}/${1}.txt" "${1}" "${OUTPUT_DIR}/epub"
+}
+
+mk_do_loop () {
+    local TARGET="${1}"
+    rm -rf "${WDIR}"
+    mkdir -p "${WDIR}"
+    for FILE in ${FILES}; do $TARGET "${FILE}"; done
+}
+
+function mk () {
+
+    case "${1}" in
+        --draft2c)
+            DRAFT_COLUMN=2
+            ;;
+        --draft_landscape)
+            DRAFT_LANDSCAPE=1
+            ;;
+        --draft_no_sentence)
+            DRAFT_NO_SENTENCE=1
+            ;;
+        --draft_no_mono)
+            DRAFT_NO_MONO=1
+            ;;
+        --use_copying)
+            USE_COPYING=1
+            ;;
+        --epub_use_series)
+            USE_SERIES=1
+            ;;
+        --no_clean)
+            NO_CLEAN_WDIR=1
+            ;;
+	pdf_draft)
+            mk_do_loop "__mk_pdf_draft"
+	    ;;
+	pdf_print)
+            mk_do_loop "__mk_pdf_print"
+	    ;;
+	pdf_web)
+            mk_do_loop "__mk_pdf_web"
+	    ;;
+	latex_print)
+            mk_do_loop "__mk_latex_print"
+	    ;;
+	latex_web)
+            mk_do_loop "__mk_latex_web"
+	    ;;
+	epub)
+            mk_do_loop "__mk_epub"
+	    ;;
+	*)
+            # shouldn't get here because of arg_pre_flight
+            # but be overzealous
+	    echo "unknown option or target: $1"
+	    exit 1
+	    ;;
+    esac
+
+}
+
+# pre-test arguments so we don't
+# have to bail with an error after 
+# doing half of something
+function arg_pre_flight {
+
+    local ARG_GOOD=0;
+
+    while test "${1}" != ""
+    do
+        ARG_GOOD=0;
+        for PARG in "pdf_print" \
+                        "pdf_web" \
+                        "latex_print" \
+                        "latex_web" \
+                        "epub" \
+                        "pdf_draft" \
+                        "--draft2c" \
+                        "--draft_landscape" \
+                        "--draft_no_mono" \
+                        "--draft_no_sentence" \
+                        "--use_copying" \
+                        "--epub_use_series" \
+                        "--no_clean"
+        do
+            if test "${PARG}" = "${1}"
+            then
+                ARG_GOOD=1
+                break
+            fi
+        done
+        if test $ARG_GOOD -eq 0
+        then
+            echo "UNKNOW ARG: ${1}"
+            exit 1
+        fi
+        shift
+    done
+
+    if test $# -gt 0
+    then
+        echo "EMPTY ARGS PRESENT ON COMMAND LINE"
+        exit 1
+    fi
+
+}
+            
+
+###################
+#       MAIN      #
+###################
+function main () {
+
+    arg_pre_flight "$@"
+    
+    while test "${1}" != ""
+    do
+	mk "${1}"
+	shift
+    done
+
+    if test $NO_CLEAN_WDIR -eq 0
+    then
+        clean
+    fi
+}
+
+
+

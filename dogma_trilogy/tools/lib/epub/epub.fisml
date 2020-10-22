@@ -1,0 +1,162 @@
+{02BF}||’||
+{11DOTS}||...........||
+{5DOTS}||.....||
+{5DOTS%}||..... ||
+{%11DOTS%}||........... ||
+
+{CHAPTER_P1}||<div class="chapter center"><img class="chapter" alt="chapter" src="chapter_sigil.jpg"/></div>||
+{CHAPTER_P2}||<div class="chapter center"><img class="chapter" alt="chapter" src="chapter_sigil.jpg"/></div>||
+{CHAPTER_P3}||<div class="chapter center"><img class="chapter" alt="chapter" src="chapter_sigil.jpg"/></div>||
+
+{CHAPTER_UNMARKED}||<div class="f150 pad_2em_bot center">&#xA0;</div>||
+
+{FILL_IN_BLANK}||______________||
+
+{MRS_TURTLE>}||<i>”||
+{<MRS_TURTLE}||“</i>||
+{MRS_FOX>}||<i>”||
+{<MRS_FOX}||“</i>||
+
+{ONSCREEN_INSTRUCTIONS>}||<span class="inverted">||
+{<ONSCREEN_INSTRUCTIONS}||</span>||
+
+{PHILOSOPHER_ON_TAPE>}||»<i>||
+{<PHILOSOPHER_ON_TAPE}||</i>«||
+
+{PRINCIPAL_PHONE>}||<i>”||
+{<PRINCIPAL_PHONE}||“</i>||
+
+{RADIO_AMERIKA>}||«<i>||
+{<RADIO_AMERIKA}||</i>»||
+{RADIO_ANTI_SLEEP>}||«<i>||
+{<RADIO_ANTI_SLEEP}||</i>»||
+{RADIO_BOOM>}||<i>||
+{<RADIO_BOOM}||</i>||
+{RADIO_CARL>}||«<i>||
+{<RADIO_CARL}||</i>»||
+{RADIO_CARMINE>}||«<i>||
+{<RADIO_CARMINE}||</i>»||
+{RADIO_CHOMSKY_FRAG>}||«<i>||
+{<RADIO_CHOMSKY_FRAG}||</i>»||
+{RADIO_CONTACT>}||«<i>||
+{<RADIO_CONTACT}||</i>»||
+{RADIO_EFKO>}||«<i>||
+{<RADIO_EFKO}||</i>»||
+{RADIO_FRASIER>}||«<i>||
+{<RADIO_FRASIER}||</i>»||
+{RADIO_GEN_KILL>}||«<i>||
+{<RADIO_GEN_KILL}||</i>»||
+{RADIO_HOPE>}||«<i>||
+{<RADIO_HOPE}||</i>»||
+
+{RADIO_INSURANCE>}||»<i>||
+{<RADIO_INSURANCE}||</i>«||
+
+{RADIO_WRONG>}||«<i>||
+{<RADIO_WRONG}||</i>»||
+{RADIO_INTERJECT>}||«<i>||
+{<RADIO_INTERJECT}||</i>»||
+{RADIO_JANE>}||«<i>||
+{<RADIO_JANE}||</i>»||
+{RADIO_JOEL>}||«<i>||
+{<RADIO_JOEL}||</i>»||
+{RADIO_JOHN>}||«<i>||
+{<RADIO_JOHN}||</i>»||
+{RADIO_JOSH>}||«<i>||
+{<RADIO_JOSH}||</i>»||
+{RADIO_JULIA>}||«<i>||
+{<RADIO_JULIA}||</i>»||
+{RADIO_LESBIAN_BEARS>}||«<i>||
+{<RADIO_LESBIAN_BEARS}||</i>»||
+{RADIO_LUCY2>}||«<i>||
+{<RADIO_LUCY2}||</i>»||
+{RADIO_MACINTYRE>}||«<i>||
+{<RADIO_MACINTYRE}||</i>»||
+{RADIO_MARGO>}||«<i>||
+{<RADIO_MARGO}||</i>»||
+{RADIO_MINDY>}||«<i>||
+{<RADIO_MINDY}||</i>»||
+{RADIO_POPE>}||«<i>||
+{<RADIO_POPE}||</i>»||
+{RADIO_PROF_R>}||«<i>||
+{<RADIO_PROF_R}||</i>»||
+{RADIO_RAPE>}||«<i>||
+{<RADIO_RAPE}||</i>»||
+{RADIO_RENQUIST>}||«<i>||
+{<RADIO_RENQUIST}||</i>»||
+{RADIO_REVEREND>}||«<i>||
+{<RADIO_REVEREND}||</i>»||
+{RADIO_STEVEN>}||«<i>||
+{<RADIO_STEVEN}||</i>»||
+{RADIO_TARIF>}||«<i>||
+{<RADIO_TARIF}||</i>»||
+{RADIO_TYLER>}||«<i>||
+{<RADIO_TYLER}||</i>»||
+{RADIO_ANTI_TOILET>}||«<i>||
+{<RADIO_ANTI_TOILET}||</i>»||
+
+{RADIO_UNLABELED_TAPE>}||»<i>||
+{<RADIO_UNLABELED_TAPE}||</i>«||
+
+{RADIO_WESTERN_FRONT>}||»<i>||
+{<RADIO_WESTERN_FRONT}||</i>«||
+
+{SCHOOL_ANNOUNCER>}||<b>||
+{<SCHOOL_ANNOUNCER}||</b>||
+
+{SECRETARY_ONLINE>}||<i>||
+{<SECRETARY_ONLINE}||</i>||
+
+{SECTION_P1}||<div class="section center"><img class="section" alt="section" src="section_sigil.jpg"/></div>||
+{SECTION_P2}||<div class="section center"><img class="section" alt="section" src="section_sigil.jpg"/></div>||
+{SECTION_P3}||<div class="section center"><img class="section" alt="section" src="section_sigil.jpg"/></div>||
+
+{SPACED_PARA>}||<div class="doublespace">||
+{<SPACED_PARA}||</div>||
+
+{STATIC>}||<i>||
+{<STATIC}||</i>||
+
+{TAPE_ANTI_EVOLUTION>}||<i>”||
+{<TAPE_ANTI_EVOLUTION}||“</i>||
+{TAPE_NARRATOR>}||<i>”||
+{<TAPE_NARRATOR}||“</i>||
+
+{TOOTHPASTE_AD>}||»<span class="italic underline">||
+{<TOOTHPASTE_AD}||</span>«||
+
+{TV_OVERLAY>}||<span class="inverted">||
+{<TV_OVERLAY}||</span>||
+
+{VCR>}||<span class="inverted">||
+{<VCR}||</span>||
+
+{VOICEOVER_INSTRUCTIONS>}||<i>”||
+{<VOICEOVER_INSTRUCTIONS}||“</i>||
+
+{ri>}||<b>||
+{<ri}||</b>||
+
+{BOOK_QUOTE>}||<div class="book_quote">||
+{<BOOK_QUOTE}||</div>||
+
+{salamander>}||<p class="pad_1em_bot noindent"><i>||
+{<salamander}||</i></p>||
+
+{CENTER_PAD_A>}||<p class="center pad_1em_bot">||
+{<CENTER_PAD_A}||</p>||
+{CENTER_PAD_B>}||<p class="center pad_1p5em_top">||
+{<CENTER_PAD_B}||</p>||
+
+{scu>}||<span class="smallcaps underline">||
+{<scu}||</span>||
+
+{__UMBRELLA_CARD__}||<span class="undeline">A<span class="smallcaps">S</span> B<span class="smallcaps">EAUTIFUL</span> A<span class="smallcaps">S</span> T<span class="smallcaps">HE</span> C<span class="smallcaps">HANCE</span> E<span class="smallcaps">NCOUNTER</span> B<span class="smallcaps">ETWEEN</span> A S<span class="smallcaps">EWING</span> M<span class="smallcaps">ACHINE</span> A<span class="smallcaps">ND</span> A<span class="smallcaps">N</span> U<span class="smallcaps">MBRELLA</span></span>||
+
+{__REVOLUTIONIZE_SIGN__}||Y<span class="smallcaps">OU</span> C<span class="smallcaps">AN’T</span> R<span class="smallcaps">EVOLUTIONIZE</span> T<span class="smallcaps">HE</span> W<span class="smallcaps">ORLD</span>||
+
+{STATIC_MICRO}||<span class="italic">ssssssssssss</span>||
+{STATIC_SHORT}||<span class="italic">ssssssssssssssssssssssss</span>||
+{STATIC_LONG}||<span class="italic">ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</span>||
+
+{LONG_E}||EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE||

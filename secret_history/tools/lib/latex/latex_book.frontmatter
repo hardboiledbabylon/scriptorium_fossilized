@@ -1,0 +1,78 @@
+
+\begin{vplace}
+
+{\Huge {\centering ###TITLE###\\}}
+
+\vspace*{24pt}
+
+{\Large {\centering ###NOM_DE_GUERRE### \\}}
+
+\end{vplace}
+
+\vfill
+
+{\large {\centering ###IMPRINT### \\}}
+
+
+
+\newpage
+
+
+
+\begin{vplace}
+
+{\centering Copyright {\copyright} ###COPYRIGHT_YEAR### by ###NOM_DE_GUERRE### \\}
+
+\vspace*{3em}
+
+{\centering ###LEGALESE### \\}
+
+\vspace*{3em}
+
+%%%COPYING%%%\COPYING
+
+{\centering ###SERIAL### \\}
+
+\vspace*{3em}
+
+{\centering ###WEBSITE### \\}
+
+{\centering ###EMAIL### \\}
+
+\end{vplace}
+
+
+
+\newpage
+
+
+
+\begin{vplace}
+
+\begin{center}
+\begin{minipage}{.7\linewidth}%
+\raggedright%
+{###DEDICATION###}
+\end{minipage}
+\end{center}
+
+\end{vplace}
+
+
+
+\newpage
+
+\cleardoubleoddpage
+
+\begin{vplace}
+
+{\centering {\Huge \v{T}\={e}\hskip .25em S\={e}k\llap{'}r\.{t}\hskip .25em Hs\llap{'}tr\={e}\hskip .25em\relax\raisebox{.05em} ^^^^0283\hskip .25em{}M\'{r}z}\\}
+
+\end{vplace}
+
+\newpage
+
+\blankpage
+
+
+

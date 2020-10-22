@@ -1,0 +1,43 @@
+\documentclass[paper=5.25in:8in,pagesize=pdftex,headinclude=on,footinclude=on,fontsize=10.5pt]{scrbook}
+
+\input{common.tex}
+
+\newfontfamily{\chapterfont}[Path=./fonts/,]{ButNotForUs.ttf}
+
+\def\chapterSigil{\noindent
+  \hfill{\chapterfont\fontsize{50pt}{50pt}\selectfont  A}\hfill\null
+  \vspace{6\baselineskip}
+\vfill}
+
+\def\sectionSigil{%
+\raisebox{-2pt}{{\chapterfont\fontsize{14}{14}\selectfont B\hspace{2pt}B\hspace{2pt}B}}}
+
+
+\def\chapterBreak{\newpage\chapterSigil\vfill}
+
+
+\def\sectionBreak{%
+  \vfill
+  \vspace{.5\baselineskip}
+  \hfill\sectionSigil\hfill\null
+  \vspace{.5\baselineskip}
+  \vfill}
+
+\input{hyphenates.tex}
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+\openPRINTorWEB
+
+\input{frontmatter.tex}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{body.tex}
+
+\MAYBEdoENDPAGE
+
+\end{document}

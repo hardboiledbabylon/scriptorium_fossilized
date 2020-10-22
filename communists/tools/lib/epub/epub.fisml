@@ -1,0 +1,128 @@
+{CHAPTER}||||
+{PARA_HANG>}||<p class="hanging">||
+{<PARA_HANG}||</p>||
+
+{REC_ERR>}||<p class="center smallcaps pad_1em_topbot">||
+{<REC_ERR}||</p>||
+{RESET>}||<p class="center smallcaps pad_1em_bot">||
+{<RESET}||</p>||
+
+{TXT>}||||
+{<TXT}||||
+{TV>}||||
+{<TV}||||
+{TXT+TV>}||||
+{<TXT+TV}||||
+{SONG>}||||
+{<SONG}||||
+
+
+{TITLE>}||<div class="title nohyph">||
+{<TITLE}||</div>||
+
+{VIDEO>}||<div class="txt_img center"><img class="text_img" alt="media player playing" src="communists.media_play.jpg"/></div><div class="noindent">||
+{<VIDEO}||</div><div class="txt_img center"><img class="text_img negative_space" alt="media player stopped" src="communists.media_stop.jpg"/></div>||
+{<VIDEO>}||<div class="txt_img center"><img class="text_img" alt="media player play next" src="communists.media_play.jpg"/></div>||
+
+{INTERJECT>}||<div class="interject">||
+{<INTERJECT}||</div>||
+
+{PREAMBLE>}||<div class="preamble">||
+{<PREAMBLE}||</div>||
+{TITLE_AUTH_REF>}||<div class="right_align">||
+{<TITLE_AUTH_REF}||</div>||
+
+{<HANG_END}||</p>||
+{MARGIN_END}||</p>||
+
+{HANG_INDENT10EM}||<p class="hangindent_10em">||
+{HANG_INDENT11EM}||<p class="hangindent_11em">||
+{HANG_INDENT12EM}||<p class="hangindent_12em">||
+{HANG_INDENT13EM}||<p class="hangindent_13em">||
+{HANG_INDENT14EM}||<p class="hangindent_14em">||
+{HANG_INDENT15EM}||<p class="hangindent_15em">||
+{HANG_INDENT16EM}||<p class="hangindent_16em">||
+{HANG_INDENT17EM}||<p class="hangindent_17em">||
+{HANG_INDENT18EM}||<p class="hangindent_18em">||
+{HANG_INDENT23EM}||<p class="hangindent_23em">||
+{HANG_INDENT3EM}||<p class="hangindent_3em">||
+{HANG_INDENT4EM}||<p class="hangindent_4em">||
+{HANG_INDENT5EM}||<p class="hangindent_5em">||
+{HANG_INDENT6EM}||<p class="hangindent_6em">||
+{HANG_INDENT7EM}||<p class="hangindent_7em">||
+{HANG_INDENT8EM}||<p class="hangindent_8em">||
+{HANG_INDENT9EM}||<p class="hangindent_9em">||
+
+{PHANTOM_ADDWATER&}||<p class="margin_left_8per">||
+{PHANTOM_COURTNEY&}||<p class="margin_left_8per">||
+{PHANTOM_ANCHOR&}||<p class="margin_left_6per">||
+{PHANTOM_ARGUE&}||<p class="margin_left_5per">||
+{PHANTOM_ARMY&}||<p class="margin_left_4per">||
+{PHANTOM_ASSAD&}||<p class="margin_left_5per">||
+{PHANTOM_BORGES&}||<p class="margin_left_5per">||
+{PHANTOM_CANCER&}||<p class="margin_left_6per">||
+{PHANTOM_CATHEX&}||<p class="margin_left_5per">||
+{PHANTOM_GUY&}||<p class="margin_left_3per">||
+{PHANTOM_HAPPI&}||<p class="margin_left_4per">||
+{PHANTOM_HARTNETTE&}||<p class="margin_left_8per">||
+{PHANTOM_HOSTA&}||<p class="margin_left_4per">||
+{PHANTOM_HYSTERIA&}||<p class="margin_left_8per">||
+{PHANTOM_KEYES&}||<p class="margin_left_5per">||
+{PHANTOM_LISTE&}||<p class="margin_left_5per">||
+{PHANTOM_MARK&}||<p class="margin_left_4per">||
+{PHANTOM_MASTERS&}||<p class="margin_left_7per">||
+{PHANTOM_NEWS&}||<p class="margin_left_4per">||
+{PHANTOM_ORGONE&}||<p class="margin_left_5per">||
+{PHANTOM_PENTAGON&}||<p class="margin_left_8per">||
+{PHANTOM_PREACHER&}||<p class="margin_left_8per">||
+{PHANTOM_QUESTION&}||<p class="margin_left_8per">||
+{PHANTOM_REPLY&}||<p class="margin_left_5per">||
+{PHANTOM_RICHARDKYLIE&}||<p class="margin_left_12per">||
+{PHANTOM_SOLDIER&}||<p class="margin_left_7per">||
+{PHANTOM_STRANGER&}||<p class="margin_left_8per">||
+{PHANTOM_STRAW&}||<p class="margin_left_5per">||
+{PHANTOM_STUDENT&}||<p class="margin_left_5per">||
+{PHANTOM_SURVIVOR&}||<p class="margin_left_8per">||
+{PHANTOM_WOMAN&}||<p class="margin_left_5per">||
+
+{PHANTOM_ADDWATER&}||||
+{PHANTOM_COURTNEY&}||||
+{PHANTOM_ANCHOR&}||||
+{PHANTOM_ARGUE&}||||
+{PHANTOM_ARMY&}||||
+{PHANTOM_ASSAD&}||||
+{PHANTOM_BORGES&}||||
+{PHANTOM_CANCER&}||||
+{PHANTOM_CATHEX&}||||
+{PHANTOM_GUY&}||||
+{PHANTOM_HAPPI&}||||
+{PHANTOM_HARTNETTE&}||||
+{PHANTOM_HOSTA&}||||
+{PHANTOM_HYSTERIA&}||||
+{PHANTOM_KEYES&}||||
+{PHANTOM_LISTE&}||||
+{PHANTOM_MARK&}||||
+{PHANTOM_MASTERS&}||||
+{PHANTOM_NEWS&}||||
+{PHANTOM_ORGONE&}||||
+{PHANTOM_PENTAGON&}||||
+{PHANTOM_PREACHER&}||||
+{PHANTOM_QUESTION&}||||
+{PHANTOM_REPLY&}||||
+{PHANTOM_RICHARDKYLIE&}||||
+{PHANTOM_SOLDIER&}||||
+{PHANTOM_STRANGER&}||||
+{PHANTOM_STRAW&}||||
+{PHANTOM_STUDENT&}||||
+{PHANTOM_SURVIVOR&}||||
+{PHANTOM_WOMAN&}||||
+{PHANTOM_UNKNOWN&}||||
+
+
+{TV|>}||<span class="italics">||
+{<|TV}||</span>||
+
+{SLASH_ZERO}||0||
+{CAP_DELTA}||Δ||
+{PI}||<span class="f150">π</span>||
+

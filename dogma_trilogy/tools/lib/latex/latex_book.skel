@@ -1,0 +1,95 @@
+\documentclass[paper=5.25in:8in,pagesize=pdftex,headinclude=on,footinclude=on,fontsize=10.5pt]{scrbook}
+
+\input{common.tex}
+
+\def\teletype{\teletypefont\fontsize{9pt}{9.5}\selectfont}
+
+\def\chapterUnmarked{\cleardoubleoddpage}
+
+\def\chapterBreak#1{\clearpage{\hfill{\Huge #1}\hfill\null}
+\vspace{7\baselineskip plus 10pt minus 2pt}}
+
+\def\chapterC{\chapterBreak{^^b7 ^^b7 ^^b7}}
+
+\def\chapterB{\chapterBreak{^^b7 ^^b7}}
+
+\def\chapterA{\chapterBreak{^^b7}}
+
+\newfontfamily{\TVfont}[Path=./fonts/]{TVInfo.ttf}
+
+\def\TVinstruct{\hyphenpenalty=10000%
+\exhyphenpenalty=10000%
+\TVfont }
+
+\newenvironment{tvoverlay}{%
+\hyphenpenalty=10000%
+\exhyphenpenalty=10000%
+\leavevmode%
+\unskip%
+\ignorespaces%
+\quad%
+\TVfont%
+}{%
+\leavevmode%
+\unskip%
+\ignorespaces%
+\quad%
+}
+
+\newenvironment{DOGMAnoindent}{%
+\vspace{\baselineskip}
+\begin{disableindent}
+}{%
+\end{disableindent}
+\vspace{\baselineskip}
+}
+
+\newfontfamily{\arrowfont}[Path=./fonts/,
+UprightFont=FreeSans.ttf]{Free Sans}
+
+\def\hamza{\unskip{\reflectbox{{\realsuper{c}}}}\unskip}
+
+\DeclareRobustCommand{\skipA}{\hskip 2em\relax}
+\DeclareRobustCommand{\skipB}{\hskip 4em\relax}
+\DeclareRobustCommand{\skipC}{\hskip 6em\relax}
+
+\def\realmiddot{\raisebox{-3pt}{^^b7}}
+
+\def\sectionSigilA{{\Large \realmiddot\skipA\realmiddot\skipA\realmiddot}}
+
+\def\sectionSigilB{{\Large \realmiddot\skipB\realmiddot\skipB\realmiddot}}
+
+\def\sectionSigilC{{\Large \realmiddot\skipC\realmiddot\skipC\realmiddot}}
+
+\def\sectionBreakA{%
+\DOsectionBREAK{.5\baselineskip}{.5\baselineskip}{\sectionSigilA}}
+
+\def\sectionBreakB{%
+\DOsectionBREAK{.5\baselineskip}{.5\baselineskip}{\sectionSigilB}}
+
+\def\sectionBreakC{%
+\DOsectionBREAK{.5\baselineskip}{.5\baselineskip}{\sectionSigilC}}
+
+\def\longE{\multido{}{50}{\allowbreak{}E}}
+
+
+\DeclareRobustCommand{\irthinskip}{\hskip 0.3em\relax}
+
+\input{hyphenates.tex}
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+\openPRINTorWEB
+
+\input{frontmatter.tex}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{body.tex}
+
+\MAYBEdoENDPAGE
+
+\end{document}

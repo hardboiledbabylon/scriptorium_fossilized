@@ -1,0 +1,76 @@
+\documentclass[paper=5.25in:8in,pagesize=pdftex,headinclude=on,footinclude=on,fontsize=10.5pt]{scrbook}
+
+\input{common.tex}
+
+\def\ADDstretch{\vspace{0pt plus 2pt minus 2pt}}
+
+\def\TVsectionSymbolEnter{{\parskip=0pt\vspace{.5\baselineskip}\centering ^^^^23ee\quad{}^^^^23f8\quad{}^^^^23ed \\*[.5\baselineskip]}}
+
+\def\TVsectionSymbolExit{{\parskip=0pt\vspace{.5\baselineskip}\centering ^^^^23ee\quad{}^^^^25b6\quad{}^^^^23ed \\[.5\baselineskip]}}
+
+
+\newenvironment{disableIndentStretchB}{%
+\setlength{\parindent}{0pt}%
+\setlength{\parskip}{1\baselineskip plus 2pt minus 2pt}%
+\vskip-\baselineskip
+}{%
+}
+
+\def\TVsectionEnter{\ADDstretch
+\TVsectionSymbolEnter\par
+\ADDstretch
+\begin{disableIndentStretchB}
+\ADDstretch}
+
+\def\TVsectionExit{\end{disableIndentStretchB}\par
+\ADDstretch
+\TVsectionSymbolExit\par
+\ADDstretch}
+
+\def\TVsectionInter{\end{disableIndentStretchB}\par
+\ADDstretch
+\TVsectionSymbolEnter\par
+\begin{disableIndentStretchB}
+\ADDstretch}
+
+\def\chapterTitleREAL#1{%
+\vspace{1.5\baselineskip plus 3pt minus 3pt}
+{\noindent\parbox[b]{.9\textwidth}{%
+\raggedright
+\unskip\noindent{\Large #1}\unskip}}
+\vspace{.5\baselineskip plus 3pt minus 3pt}}
+
+\def\BOXUP#1{%
+{\noindent\parbox[b]{.9\textwidth}{%
+\raggedright
+\unskip\noindent{\Large #1}\unskip}}}
+
+\newlength\COMMtitleHeight
+
+\def\chapterTitle#1{%
+\settototalheight{\COMMtitleHeight}{\BOXUP{#1}}%
+\Needspace{\dimexpr\COMMtitleHeight+4\baselineskip}%
+\chapterTitleREAL{#1}}
+
+
+\newfontfamily{\slashZeroFont}[Path=./fonts/,]{EBslashZero.ttf}
+\def\slashZero{{\slashZeroFont 0}}
+
+\input{hyphenates.tex}
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+\openPRINTorWEB
+
+\input{frontmatter.tex}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{body.tex}
+
+\MAYBEdoENDPAGE
+
+\end{document}

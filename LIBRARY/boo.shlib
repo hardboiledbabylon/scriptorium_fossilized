@@ -1,0 +1,80 @@
+# Copyright © 2018 by D. F. Hall <authorfunction@hardboiledbabylon.com>
+
+# Permission to use, copy, modify, and/or distribute this software for
+# any purpose with or without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies.
+
+# THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL
+# WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+# AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA
+# OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+# TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+
+#helper functions for generating .boo files
+
+function boo_grep_html_title () {
+    local n="${1}"
+    ${GREP_CMD} -o '<title>..*</title>' "${n}" | head -1 | \
+        sed 's/<\/*title>//g'
+}
+
+#at this stage files searched will be in html
+function boo_sect_loop () {
+    local n="${1}"
+    for i in $(find . -name "${n}" -print | sed 's/^\.\///' | sort)
+    do
+        local x=`boo_grep_html_title "${i}"`
+        echo "${i}||${x}"
+    done
+}
+
+function __boo_prefill_std_files () {
+    echo "cover.html||Cover" 
+
+    if test $USE_COPYING -ne 0
+    then
+        echo "copying.html||Copying" 
+    fi
+    echo "titlepage.html||Title Page"
+    echo "dedication.html||Dedication"
+    echo "halftitle.html||Title"
+}
+
+function __boo_prefill_isbn_auth () {
+    echo "!isbn:${UUID[$ID_EPUB]}"
+    echo "!auth:$(fisml_get_attr.pl "${1}" "nom de guerre")"
+}
+
+function boo_prefill () {
+    __boo_prefill_isbn_auth "${1}"
+
+    local MIN_TITLE=$(fisml_get_attr.pl "${1}" "title")
+    local FULL_TITLE="${MIN_TITLE}"
+    
+    if test $USE_SERIES -ne 0
+    then
+        local SERIES=$(fisml_get_attr.pl "${1}" "series") 
+        local SERIES_ORD=$(fisml_get_attr.pl "${1}" "series_ord")
+        if test "${SERIES}" != ""
+        then
+            FULL_TITLE="(${SERIES} ${SERIES_ORD}) $MIN_TITLE"
+        fi
+    fi
+    
+    echo "!title:${FULL_TITLE}" 
+
+    __boo_prefill_std_files
+}
+
+function boo_prefill_builtin_subtitle () {
+    __boo_prefill_isbn_auth "${1}"
+    local SUB="$(fisml_get_attr.pl "${1}" "subtitle")"
+    local TITLE="$(fisml_get_attr.pl "${1}" "title")" 
+    local REAL_TITLE="${TITLE} ${SUB}"
+    echo "!title:${REAL_TITLE}"
+    __boo_prefill_std_files
+}

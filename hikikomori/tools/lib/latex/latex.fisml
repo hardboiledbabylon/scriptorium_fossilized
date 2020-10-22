@@ -1,0 +1,76 @@
+
+{HANGWIDTH>}||\monofont\fontsize{9}{10}\selectfont \settowidth{\TPARA}{||
+{<HANGWIDTH}|e| }\normalfont\normalsize^M\leftskip\TPARA^M^M\vspace*{-2\baselineskip}^M||
+{<HANG_END}|e|^M^M\leftskip0em\vspace{0pt plus 2pt minus 2pt}||
+
+{MONO>}||{\monofont\fontsize{9}{10}\selectfont ||
+{<MONO}||}||
+
+
+{GROUP>}||\begingroup||
+{<GROUP}||\endgroup||
+
+{ADVENTURE>}||\begin{adventure}||
+{<ADVENTURE}||\end{adventure}||
+
+{SUBSECTION}||\Needspace{3\baselineskip}\vspace{1\baselineskip plus 2pt minus 2pt}||
+
+{TITLE>}|e|\hikiInitTitle^M^M\begin{hikiSectionTitle}||
+{<TITLE}|e|\end{hikiSectionTitle}^M^M\hikiEndTitle||
+
+{TV>}||\textit{||
+{<TV}||}||
+{SONG>}||\textit{||
+{<SONG}||}||
+
+{MARGIN_END}||\end{addmargin}||
+
+{42_ITALIC_A}||{\itshape A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A\-A}||
+
+{i2>}||{\itshape ||
+{<i2}||}||
+
+{DEV>}||\LeftCurlyQuote\textit{||
+{<DEV}||}\RightCurlyQuote{}||
+
+{EMAIL>}||\vspace{1\baselineskip plus 2pt minus 2pt}\begin{addmargin}[.10\textwidth]{0em}||
+{<EMAIL}||\end{addmargin}\vspace{1\baselineskip plus 2pt minus 2pt}||
+
+{::MUSIC_LONG::}||\hikiMusicLong ||
+{::MUSIC_SHORT::}||\hikiMusicShort ||
+{::MUSIC_WAKE_TONE::}||\hikiMusicWake ||
+
+{SMALL>}||{\small ||
+{<SMALL}||}||
+{SMALLER>}||{\footnotesize ||
+{<SMALLER}||}||
+{SMALLEST>}||{\scriptsize ||
+{<SMALLEST}||}||
+
+{::SMILEY_ROBOT::}||\hikiRobotSmiley ||
+{::TEARY_ROBOT::}||\hikiRobotTeary ||
+{::FROWNY_ROBOT::}||\hikiRobotFrowny ||
+{::POINT_ROBOT::}||\hikiRobotPoint ||
+{::EMOJI_FRENZY_ROBOT::}||\hikiRobotEmoji ||
+
+{::MANIC_UNSUBSCRIBE::}||\hikiManicUNSUBSCRIBE ||
+
+{::GARDEN1::}||\hikiGardenA ||
+
+{VIDEO>}||\textit{||
+{<VIDEO}||}||
+
+{NEWS>}||\LeftCurlyQuote\textit{||
+{<NEWS}||}\RightCurlyQuote{}||
+
+{@--->}||\emdashStart ||
+{<@---}||||
+
+{DROP>}||{\fontsize{24}{30}\selectfont\raisebox{-3pt}{||
+{<DROP}||}}||
+
+{1ST_PARA>}||\noindent\ignorespaces ||
+{<1ST_PARA}||||
+
+{ASCII:'}||{\normalfont\monofont '}||
+{@@NEWPAGE@@}||\clearpage||

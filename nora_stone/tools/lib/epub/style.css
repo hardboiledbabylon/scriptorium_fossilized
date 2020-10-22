@@ -1,0 +1,105 @@
+body {
+  margin: auto;
+  width: auto;
+  widows: 1;
+  orphans: 1;
+}
+.pad_1em_top {
+  padding-top: 1em;
+}
+.pad_2em_top {
+  padding-top: 2em;
+}
+.pad_2em_bot {
+  padding-bottom: 2em;
+}
+.pad_5em {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+.pad_5em_bot {
+  padding-bottom: 5em;
+}
+.pad_40p_bot {
+  padding-bottom: 40%;
+}
+.f150 {
+  font-size: 150%;
+}
+.f200 {
+    font-size: 200%;
+}
+.pad_1em_bot {
+    padding-bottom: 1em;
+}
+.smallcaps {
+    font-size: 80%;
+    font-style: normal;
+}
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+}
+div, p, pre, h1, h2, h3, h4, h5, h6 {
+  margin-left: 0;
+  margin-right: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+  clear: both;
+  font-weight: bold;
+}
+h2 {
+  margin-bottom: 20%;
+}
+div {
+  line-height: 150%;
+  text-align: justify;
+}
+p {
+  line-height: 150%;
+  margin: 0 auto 0.2em;
+  text-align: justify;
+  text-indent: 0em;
+  margin-bottom: 1em;
+}
+.center {
+  text-align: center;
+  text-indent: 0;
+}
+img.cover {
+  width: auto;
+  height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+div.legalese {
+  text-indent: 0;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+p.dedication {
+  text-indent: 0;
+}
+div.title{
+    font-size: 150%;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    line-height: 100%;
+}
+.nohyph{
+    hyphens: none;
+    adobe-hyphenate: none;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    -epub-hyphens: none;
+}
+div.crypto {
+    font-size: 1%;
+}

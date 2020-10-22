@@ -1,0 +1,231 @@
+{~.}||.~||
+{.}||.\thinkern ||
+{DTHIN_KERN}||\thinkern\thinkern ||
+{SPACE}||\ ||
+{NOBREAK}||\nobreak{}||
+{NOBREAK_SPC}||~||
+{NBSP}||~ ||
+
+{DBLSPACE>}||\begin{doublespacedpara}||
+{<DBLSPACE}||\end{doublespacedpara}||
+
+{NOINDENT}||\noindent\ignorespaces ||
+
+{``}||\LeftCurlyQuote ||
+{''}||\RightCurlyQuote{}||
+{`}||\LeftCurlyQuoteS ||
+{'}||\RightCurlyQuoteS{}||
+
+{"---}||\emdashDialogBeg ||
+{---"}||\emdashDialogEnd{}||
+
+{...?}||\ellipsisQuestion{}||
+{....}||\ellipsisPeriod{}||
+{....$}||\ellipsisPeriod||
+{...!}||\ellipsisExclamation{}||
+{...,}||\ellipsisComma{}||
+{...$}||\ellipsisEnd{}||
+{...%}||\ellipsisSpaceAfter ||
+{%...}||\ellipsisSpaceBefore ||
+{%...%}||\ellipsisSpaceBeforeAfter ||
+{^...}||\ellipsisStart ||
+{^...$}||\ellipsisNoBreak ||
+{~...~}||\ellipsisOnlyLine ||
+{...}||\ellipsis ||
+{[...]}||\ellipsisBracket ||
+{[...]$}||\ellipsisBracketEnd ||
+{^...%}||\ellipsisStartSpace ||
+{^...$}||\ellipsisStart ||
+{^---$}||\emdashStart ||
+{-}||\dashJoinAllowBreak ||
+{+}||\zeroJoinAllowBreak ||
+{+!}||\zeroJoinNoBreak ||
+
+{%11DOTS%}||\elevenIslandDots ||
+{5DOTS}||\fiveDots ||
+{5DOTS%}||\fiveEndDots{} ||
+{42DOTS}||\fortytwoDots ||
+{42DOTS%}||\fortytwoEndDots{} ||
+{6DOTS}||\sixDots ||
+{75DOTS}||\seventyfiveDots ||
+{7DOTS}||\sevenDots ||
+{12DOTS}||\twelveDots ||
+{15DOTS}||\fifteenDots ||
+{18DOTS}||\eighteenDots ||
+{21DOTS}||\twentyoneDots ||
+{9DOTS}||\nineDots ||
+{9DOTS$}||\nineEndDots{} ||
+{9DOTS%}||\nineEndDots{} ||
+{^9DOTS}||\nineStartDots ||
+{12DOTS$}||\twelveEndDots ||
+{21DOTS$}||\twentyoneEndDots{} ||
+{42DOTS$}||\fortytwoEndDots{} ||
+{6DOTS$}||\sixEndDots{} ||
+{18DOTS$}||\eighteenEndDots{} ||
+{18DOTS%}||\eighteenEndDots{} ||
+{12DOTS%}||\twelveEndDots{} ||
+{6DOTS%}||\sixIslandDots ||
+{15DOTS$}||\fifteenEndDots{} ||
+{7DOTS$}||\sevenEndDots{} ||
+
+{GREATER_THAN}||>||
+{LESS_THAN}||<||
+
+{PERCENT}||\%||
+{DOLLAR}||\$||
+{AND}||\&||
+{TILDE}||\textasciitilde{}||
+{UNDERSCORE}||\_||
+{CIRCUM}||\textasciicircum{}||
+{BKSLASH}||\textbackslash{}||
+{POUND_HASH}||\#||
+ {ASTERISK}||\textasteriskcentered{}||
+{ASTERISK}||*||
+
+ {!?}||!\llap ?||
+ {?!}||?\llap !||
+
+ {!?}||!?||
+ {?!}||?!||
+
+{!?}||^^^^2049||
+{?!}||^^^^2048||
+{??}||^^^^2047||
+
+{BRACE_L}||\{||
+{BRACE_R}||\}||
+
+{---}||\emdash ||
+{^---}||\emdashStart ||
+{---$}||\emdashEnd ||
+{%---%}||\emdashSpaceBeforeAfter ||
+{---%}||\emdashSpaceAfter ||
+{%---}||\emdashStart ||
+
+{THINSPACE}||\thinspace ||
+
+{}|| ||
+
+{CENTER>}||{\centering ||
+{<CENTER}||\\}||
+
+{FOOT>}||\footnote{||
+{<FOOT}||}||
+
+{LARGE>}||{\Large ||
+{<LARGE}||}||
+
+{HUGE>}||{\LARGE ||
+{<HUGE}||}||
+
+{HUGER>}||{\Huge ||
+{<HUGER}||}||
+
+{NOINDENT>}||\begin{disableindent}||
+{<NOINDENT}||\end{disableindent}||
+
+{NOINDENT2>}||\begin{disableIndentStretch}||
+{<NOINDENT2}||\end{disableIndentStretch}||
+
+{NOINDENT!>}||\noindent\ignorespaces ||
+{<NOINDENT!}||||
+
+{PAD_A>}||||
+{<PAD_A}||\vspace{1\baselineskip plus 2pt minus 2pt}||
+
+{VPAD}||\vspace{\baselineskip}||
+
+{PAD_B>}||\vspace{1\baselineskip plus 2pt minus 2pt}||
+{<PAD_B}||||
+
+{PAD_BA>}||\vspace{1\baselineskip plus 2pt minus 2pt}||
+{<PAD_BA}||\vspace{1\baselineskip plus 2pt minus 2pt}||
+
+{ALIGN_R>}||\begin{flushright}||
+{<ALIGN_R}||\end{flushright}||
+{ALIGN_L>}||\begin{flushleft}||
+{<ALIGN_L}||\end{flushleft}||
+
+{SINGLE_Q>}||'||
+{<SINGLE_Q}||'||
+{ASCII_APOSTROPHE}||'||
+{ASCII:'>}||\textquotesingle ||
+{<ASCII:'}||\textquotesingle{}||
+{ASCII:'}||\textquotesingle{}||
+
+{SUP>}||\realsuper{||
+{<SUP}||}||
+
+{TRADEMARK}||\realsuper{TM}||
+{REGISTERED}||®||
+{COPYRIGHT}||©||
+
+{NAME_CENSOR}||^^^^2015||
+
+{i>}||\textit{||
+{<i}||}||
+{n>}||\textnormal{||
+{<n}||}||
+{u>}||\ul{||
+{<u}||}||
+{ui>}||\textit{\ul{||
+{<ui}||}}||
+{b>}||\textbf{||
+{<b}||}||
+{bi>}||\textbf{\textit{||
+{<bi}||}}||
+
+
+{sc>}||{\scupcase ||
+{<sc}||}||
+
+{NUM2>}||{\altnumber ||
+{<NUM2}||}||
+
+{sc2>}||{\scshape ||
+{<sc2}||}||
+
+{BKSLASH}||\textbackslash{}||
+
+{CHAPTER}||\chapterBreak ||
+{SECTION}||\sectionBreak ||
+{1ST_PARA>}||\noindent\ignorespaces ||
+{<1ST_PARA}||||
+
+{TELETYPE>}||\begin{teletype}||
+{<TELETYPE}||\end{teletype}||
+{MONO>}||{\monofont ||
+{<MONO}||}||
+
+{french>}||\textit{||
+{<french}||}||
+{german>}||\textit{||
+{<german}||}||
+{latin>}||\textit{||
+{<latin}||}||
+{greek>}||\textit{||
+{<greek}||}||
+
+{HANGON>}||\hangOn{5pt}{||
+{<HANGON}||}||
+
+{dsc>}||||
+{<dsc}||||
+
+{BOX>}||\FFbox{||
+{<BOX}||}||
+
+{PDF_BOOKMARK_N>}||\pdfbookmark[0]{||
+{<PDF_BOOKMARK_N>}||}{||
+{<PDF_BOOKMARK_N}||}||
+
+{BR}||\\ ||
+{@@>>}||\mbox{||
+{<<@@}||}||
+
+{ul@@}||\ul{||
+{@@ul}||}||
+{Lul@@}||\ul{||
+{@@Lul}||}||
+{@@Eul}||||
+

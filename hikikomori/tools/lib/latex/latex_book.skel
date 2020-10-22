@@ -1,0 +1,188 @@
+\documentclass[paper=5.25in:8in,pagesize=pdftex,headinclude=on,footinclude=on,fontsize=10.5pt]{scrbook}
+
+\input{common.tex}
+
+\newfontfamily{\hikifont}[Path=./fonts/,
+Scale=MatchUppercase]{AmericanHikikomori.ttf}
+
+\newenvironment{hikiSectionTitle}{%
+\vspace*{.25\textheight}%
+\thispagestyle{empty}%
+\begin{addmargin}[0em]{.10\textwidth}%
+\begin{flushright}%
+\LARGE
+}{%
+\end{flushright}%
+\end{addmargin}}
+
+\def\hikisubsection{\vspace{.5\baselineskip}{\hikifont\noindent{\centering\LARGE 0\\}}\vspace{.5\baselineskip}}
+
+\def\hikiInitTitle{\clearpage\thispagestyle{empty}\cleardoubleevenpage\thispagestyle{empty}\vspace*{.18\textheight}{\hikifont\fontsize{100}{100}\selectfont 1}\clearpage}
+
+\def\hikiEndTitle{\clearpage\vspace*{9\baselineskip}}
+
+\newenvironment{adventure}{%
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\vspace{1\baselineskip plus 2pt minus 2pt}
+\begin{addmargin}[3em]{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.5\baselineskip plus 1pt minus 1pt}
+\vskip-.5\baselineskip
+\begin{allsc}
+}{%
+\end{allsc}
+\end{addmargin}
+\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+\def\hikiMusicA{\noindent{\hikifont A\hfill B\hfill A\hfill B\hfill A}}
+\def\hikiMusicB{\noindent{\hikifont B\hfill A\hfill B\hfill A\hfill B}}
+
+
+\def\hikiMusicLong{\clearpage\noindent\multido{}{63}{{\hikifont A\allowbreak B\allowbreak C\allowbreak D\allowbreak E\allowbreak F\allowbreak G\allowbreak H\allowbreak I\allowbreak J\allowbreak K\allowbreak L\allowbreak}}\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+
+
+\def\hikiMusicShort{\vspace{1\baselineskip plus 2pt minus 2pt}\noindent\multido{}{21}{{\hikifont H\allowbreak I\allowbreak J\allowbreak K\allowbreak L\allowbreak A\allowbreak B\allowbreak C\allowbreak D\allowbreak E\allowbreak F\allowbreak G\allowbreak}}\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+
+\def\hikiMusicWake{\noindent\multido{}{7}{{\hikifont L\allowbreak A\allowbreak K\allowbreak B\allowbreak J\allowbreak C\allowbreak I\allowbreak D\allowbreak H\allowbreak G\allowbreak F\allowbreak E\allowbreak}}\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+\def\hikiRobotSmiley{\vspace{1\baselineskip plus 2pt minus 2pt}\hfill{\hikifont\fontsize{100}{100}\selectfont 4\hfill\null}\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+\def\hikiRobotFrowny{\vspace{1\baselineskip plus 2pt minus 2pt}\hfill{\hikifont\fontsize{100}{100}\selectfont 5\hfill\null}\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+\def\hikiRobotTeary{\vspace{1\baselineskip plus 2pt minus 2pt}\hfill{\hikifont\fontsize{100}{100}\selectfont 6\hfill\null}\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+\def\hikiRobotPoint{\vspace{1\baselineskip plus 2pt minus 2pt}\hfill{\hikifont\fontsize{100}{100}\selectfont 8\hfill\null}\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+\def\hikiRobotEmojiMain#1#2#3#4{\begin{minipage}{.96\textwidth}%
+\hfill{\hikifont\fontsize{100}{100}\selectfont 7}\hfill\null\par%
+\vspace*{-67pt}%
+\hfill{\hikifont\LARGE #1}\hfill\null\par%
+\hfill{\hikifont\LARGE #2}\hfill\null\par%
+\hfill{\hikifont\LARGE #3}\hfill\null\par%
+\hfill{\hikifont\LARGE #4}\hfill\null%
+\end{minipage}}
+
+\def\hikiRobotEmojiFirst#1#2#3#4{\begin{minipage}{.96\textwidth}%
+\hfill{\hikifont\fontsize{100}{100}\selectfont 7}\hfill\null\par%
+\vspace*{-67pt}%
+\hfill{\hikifont\LARGE #1}\hfill\null\par%
+\vspace{.5pt}
+\hfill{\hikifont\LARGE #2}\hfill\null\par%
+\vspace{.5pt}
+\hfill{\hikifont\LARGE #3}\hfill\null\par%
+\vspace{.5pt}
+\hfill{\hikifont\LARGE #4}\hfill\null%
+\end{minipage}}
+
+\def\Lbmcef{\raisebox{-2pt}{bmcef}}
+
+\def\hikiRobotEmoji{\vspace{\baselineskip}%
+\hikiRobotEmojiFirst{\Lbmcef}{\Lbmcef}{\Lbmcef}{\Lbmcef}%
+\vspace{.10\baselineskip plus 2pt minus 2pt}%
+\hikiRobotEmojiMain{lijgo}{kmdfc}{ooooo}{gcikk}\par%
+\vspace{1\baselineskip plus 2pt minus 2pt}%
+\hikiRobotEmojiMain{ldkoo}{oofdo}{kokfo}{dfofo}\par%
+\vspace{1\baselineskip plus 2pt minus 2pt}%
+\hikiRobotEmojiMain{ldkoo}{odfdo}{kodfo}{dfodo}\par%
+\vspace{1\baselineskip plus 2pt minus 2pt}%
+\hikiRobotEmojiMain{ldkdo}{odfdo}{dodod}{dfodd}\par%
+\vspace{1\baselineskip plus 2pt minus 2pt}%
+\hikiRobotEmojiMain{ldddo}{ddfdo}{dddod}{dfddd}\par%
+\vspace{1\baselineskip plus 2pt minus 2pt}%
+\hikiRobotEmojiMain{ddddd}{ddfdd}{ddddd}{ddddd}\par%
+\vspace{1\baselineskip plus 2pt minus 2pt}%
+\hikiRobotEmojiMain{ddddd}{ddddd}{ddddd}{ddddd}\par%
+\vspace{1\baselineskip plus 2pt minus 2pt}
+}
+
+
+\def\hikiManicDelete{%
+\vspace{.5\baselineskip minus 2pt}
+\begin{center}
+\begin{minipage}{\textwidth}
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+\begingroup
+ \fontsize{19}{21}\selectfont
+ \noindent\textsc{delete}\par
+ \noindent\hfill\textsc{delete}\hfill\null\par
+ \noindent\hfill\textsc{delete}\par
+\endgroup
+\begin{addmargin}[.5\textwidth]{0em}
+  \begingroup
+  \fontsize{18}{19}\selectfont
+  \noindent\hfill\textsc{delete}\hfill\null\par
+  \noindent\textsc{delete}\par
+\endgroup
+ \begingroup
+  \fontsize{13}{15}\selectfont
+  \vskip1pt
+  \noindent\hspace{55pt}\textsc{delete}\par
+  \noindent\hfill\textsc{delete}\par
+\endgroup
+\end{addmargin}
+\begin{addmargin}[.75\textwidth]{0em}
+\begingroup
+  \fontsize{11}{13}\selectfont
+  \noindent\hfill\textsc{delete}\hfill\null\par
+  \noindent\textsc{delete}\par
+\endgroup
+\begingroup
+  \fontsize{9}{11}\selectfont
+  \noindent\hfill\textsc{delete}\hfill\null\par
+  \noindent\hfill\textsc{delete}\par
+\endgroup
+\end{addmargin}
+\begin{addmargin}[.85\textwidth]{0em}
+  \begingroup
+  \fontsize{8}{10}\selectfont
+  \noindent\hfill\textsc{delete}\hfill\null\par
+  \noindent\textsc{delete}\par
+\endgroup
+  \begingroup
+  \fontsize{7.5}{8}\selectfont
+%  \vskip1pt
+  \noindent\hfill\textsc{delete}\hfill\null\par
+  \vskip-5pt
+  \noindent\hfill\textsc{delete}
+\endgroup
+\end{addmargin}
+\end{minipage}
+\end{center}}
+
+\def\hikiManicUNSUBSCRIBE{%
+\begin{center}
+  \fontsize{20}{22}\selectfont UNSUBSCRIBE\par
+  \fontsize{18}{20}\selectfont UNSUBSCRIBE\par
+  \fontsize{16}{18}\selectfont UNSUBSCRIBE\par
+  \fontsize{14}{16}\selectfont UNSUBSCRIBE\par
+  \fontsize{12}{14}\selectfont UNSUBSCRIBE\par
+  \fontsize{10}{12}\selectfont UNSUBSCRIBE\par
+  \fontsize{8}{10}\selectfont UNSUBSCRIBE\par
+  \fontsize{7.5}{8}\selectfont UNSUBSCRIBE\par
+  \fontsize{7}{8}\selectfont UNSUBSCRIBE\par
+\end{center}}
+
+
+\def\hikiGardenA{\vspace{1\baselineskip plus 2pt minus 2pt}\hfill{\hikifont\fontsize{35}{40}\selectfont MNOPQ}\hfill\null\vspace{1\baselineskip plus 2pt minus 2pt}}
+
+\input{hyphenates.tex}
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+\openPRINTorWEB
+
+\input{frontmatter.tex}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{body.tex}
+
+\MAYBEdoENDPAGE
+
+\end{document}
